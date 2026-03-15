@@ -1,0 +1,264 @@
+{
+  "oslo-sofa": {
+    "name": "Oslo 3-Seater Sofa",
+    "category": "Sofas & Seating",
+    "collection_page": "collection-sofas.html",
+    "price": "From PKR 185,000",
+    "price_note": "Price varies by fabric & size. Final quote after selection.",
+    "description": "The Oslo Sofa is a masterclass in modern minimalism. Clean straight lines paired with deep plush cushions create a piece that is as comfortable as it is beautiful. Handcrafted in our Karachi workshop using sustainably sourced hardwood frames and premium upholstery fabrics.",
+    "lead_time": "6–8 Weeks",
+    "images": [
+      "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=900&q=85",
+      "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=900&q=85",
+      "https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?w=900&q=85",
+      "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=900&q=85"
+    ],
+    "details": {
+      "Frame": "Kiln-dried solid hardwood",
+      "Filling": "High-density foam + feather top",
+      "Width": "220 cm (3-Seater)",
+      "Depth": "92 cm",
+      "Height": "82 cm",
+      "Leg Options": "Oak / Walnut / Matte Black",
+      "Fabric Grades": "Grade A — 30,000+ rub test",
+      "Warranty": "1 Year"
+    },
+    "tags": ["modern", "sofa", "seating"]
+  },
+
+  "cove-sectional": {
+    "name": "Cove L-Shape Sectional",
+    "category": "Sofas & Seating",
+    "collection_page": "collection-sofas.html",
+    "price": "From PKR 310,000",
+    "price_note": "Price varies by configuration and fabric.",
+    "description": "The Cove L-Shape Sectional is a generous, modular sofa designed for large living rooms. Its deep seating and chaise extension make it the perfect centrepiece for family spaces or executive lounges.",
+    "lead_time": "7–9 Weeks",
+    "images": [
+      "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=900&q=85",
+      "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=900&q=85",
+      "https://images.unsplash.com/photo-1634642709649-a98c9b3a7e51?w=900&q=85"
+    ],
+    "details": {
+      "Configuration": "L-Shape with Chaise",
+      "Frame": "Solid hardwood",
+      "Filling": "High-density foam",
+      "Fabric": "Premium woven fabric",
+      "Leg Options": "Matte Black / Walnut",
+      "Warranty": "1 Year"
+    },
+    "tags": ["sectional", "sofa", "modern"]
+  },
+
+  "arc-lounge-chair": {
+    "name": "Arc Lounge Chair",
+    "category": "Sofas & Seating",
+    "collection_page": "collection-sofas.html",
+    "price": "From PKR 65,000",
+    "price_note": "Price varies by fabric selection.",
+    "description": "The Arc Lounge Chair is a sculptural accent piece with a solid ash wood base and a generously cushioned seat. Perfect for reading corners, hotel lobbies, or as a statement piece in any room.",
+    "lead_time": "4–6 Weeks",
+    "images": [
+      "https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?w=900&q=85",
+      "https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?w=900&q=85"
+    ],
+    "details": {
+      "Base": "Solid Ash Wood",
+      "Seat": "High-density foam cushion",
+      "Fabric": "Available in 8 options",
+      "Width": "76 cm",
+      "Depth": "80 cm",
+      "Height": "85 cm",
+      "Warranty": "1 Year"
+    },
+    "tags": ["lounge", "chair", "accent"]
+  },
+
+  "haven-king-bed": {
+    "name": "Haven King Bed",
+    "category": "Bedroom",
+    "collection_page": "collection-bedroom.html",
+    "price": "From PKR 220,000",
+    "price_note": "Price varies by fabric and size. Queen size available.",
+    "description": "The Haven King Bed features a softly upholstered headboard and a solid walnut frame. A statement piece for the master bedroom — refined, comfortable, and built to last a generation.",
+    "lead_time": "6–8 Weeks",
+    "images": [
+      "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=900&q=85",
+      "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=900&q=85",
+      "https://images.unsplash.com/photo-1505693314120-0d443867891c?w=900&q=85"
+    ],
+    "details": {
+      "Frame": "Solid Walnut",
+      "Headboard": "Upholstered — choice of fabric",
+      "Size": "King (180x200 cm) / Queen (160x200 cm)",
+      "Storage": "Optional under-bed storage",
+      "Fabric Grades": "Grade A — 30,000+ rub test",
+      "Warranty": "1 Year"
+    },
+    "tags": ["bed", "bedroom", "king"]
+  },
+
+  "forma-wardrobe": {
+    "name": "Forma Sliding Wardrobe",
+    "category": "Bedroom",
+    "collection_page": "collection-bedroom.html",
+    "price": "From PKR 350,000",
+    "price_note": "Price based on linear metre. Custom sizes available.",
+    "description": "The Forma Sliding Wardrobe is a floor-to-ceiling built-in solution with smooth sliding doors and a fully customizable interior. Available in matte, gloss, and wood finishes to match any bedroom style.",
+    "lead_time": "8–10 Weeks",
+    "images": [
+      "https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=900&q=85",
+      "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=900&q=85"
+    ],
+    "details": {
+      "Type": "Floor-to-ceiling sliding",
+      "Door Finish": "Matte / Gloss / Wood veneer",
+      "Interior": "Fully customizable — rails, shelves, drawers",
+      "Handle": "Aluminium profile / Handleless",
+      "Width": "Custom to your space",
+      "Warranty": "2 Years"
+    },
+    "tags": ["wardrobe", "bedroom", "storage"]
+  },
+
+  "mesa-dining-table": {
+    "name": "Mesa Dining Table",
+    "category": "Dining",
+    "collection_page": "collection-dining.html",
+    "price": "From PKR 145,000",
+    "price_note": "Price varies by size. Custom lengths available.",
+    "description": "The Mesa Dining Table is a solid oak top paired with brushed steel legs — a perfect balance of warmth and industrial edge. Seats 6-8 comfortably and is available in custom sizes for larger spaces.",
+    "lead_time": "5–7 Weeks",
+    "images": [
+      "https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=900&q=85",
+      "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=900&q=85",
+      "https://images.unsplash.com/photo-1634642709649-a98c9b3a7e51?w=900&q=85"
+    ],
+    "details": {
+      "Top": "Solid Oak — oiled finish",
+      "Legs": "Brushed steel",
+      "Standard Size": "220 x 100 cm (seats 6–8)",
+      "Custom Sizes": "Available on request",
+      "Finish": "Natural / Dark / White",
+      "Warranty": "1 Year"
+    },
+    "tags": ["dining", "table", "modern"]
+  },
+
+  "alto-bar-stool": {
+    "name": "Alto Bar Stool",
+    "category": "Dining",
+    "collection_page": "collection-dining.html",
+    "price": "From PKR 28,000",
+    "price_note": "Price per pair. Single units available.",
+    "description": "The Alto Bar Stool combines an upholstered seat with a powder-coated steel frame for a sleek, durable finish. Ideal for kitchen islands, bar counters, and commercial hospitality settings.",
+    "lead_time": "3–5 Weeks",
+    "images": [
+      "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=900&q=85",
+      "https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?w=900&q=85"
+    ],
+    "details": {
+      "Seat": "Upholstered — choice of fabric",
+      "Frame": "Powder-coated steel",
+      "Height": "Counter (65 cm) / Bar (75 cm)",
+      "Footrest": "Integrated steel ring",
+      "Colours": "Matte Black / Brushed Gold / Chrome",
+      "Warranty": "1 Year"
+    },
+    "tags": ["stool", "dining", "bar"]
+  },
+
+  "focus-executive-desk": {
+    "name": "Focus Executive Desk",
+    "category": "Office",
+    "collection_page": "collection-office.html",
+    "price": "From PKR 95,000",
+    "price_note": "Price varies by size and cable management options.",
+    "description": "The Focus Executive Desk brings refined minimalism to the workplace. A walnut veneer top with integrated cable management and clean geometric lines — built for the modern executive who values both aesthetics and function.",
+    "lead_time": "4–6 Weeks",
+    "images": [
+      "https://images.unsplash.com/photo-1593642632559-0c6d3fc62b89?w=900&q=85",
+      "https://images.unsplash.com/photo-1497366216548-37526070297c?w=900&q=85"
+    ],
+    "details": {
+      "Top": "Walnut veneer",
+      "Frame": "Powder-coated steel",
+      "Size": "160 x 80 cm (standard)",
+      "Cable Management": "Built-in cable tray",
+      "Storage": "Optional pedestal unit",
+      "Warranty": "1 Year"
+    },
+    "tags": ["desk", "office", "executive"]
+  },
+
+  "grid-bookshelf": {
+    "name": "Grid Bookshelf",
+    "category": "Storage & Shelving",
+    "collection_page": "collection-storage.html",
+    "price": "From PKR 75,000",
+    "price_note": "Price per unit. Modular — can be combined.",
+    "description": "The Grid Bookshelf is a modular open shelving system in solid oak. It can be wall-mounted or free-standing, and multiple units can be combined to create a full wall of storage. Timeless design, maximum flexibility.",
+    "lead_time": "4–6 Weeks",
+    "images": [
+      "https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?w=900&q=85",
+      "https://images.unsplash.com/photo-1634642709649-a98c9b3a7e51?w=900&q=85"
+    ],
+    "details": {
+      "Material": "Solid Oak",
+      "Type": "Wall-mounted or free-standing",
+      "Modular": "Yes — combine multiple units",
+      "Standard Size": "120 x 200 cm",
+      "Finish": "Natural / Dark / White",
+      "Warranty": "1 Year"
+    },
+    "tags": ["shelf", "storage", "modular"]
+  },
+
+  "float-tv-console": {
+    "name": "Float TV Console",
+    "category": "Storage & Shelving",
+    "collection_page": "collection-storage.html",
+    "price": "From PKR 88,000",
+    "price_note": "Price varies by width. Up to 75 inch TV compatible.",
+    "description": "The Float TV Console is a wall-mounted media unit with a clean, floating aesthetic. Soft-close drawers, hidden cable management, and a matte lacquer finish make it as functional as it is beautiful.",
+    "lead_time": "4–6 Weeks",
+    "images": [
+      "https://images.unsplash.com/photo-1600121848594-d8644e57abab?w=900&q=85",
+      "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=900&q=85"
+    ],
+    "details": {
+      "Type": "Wall-mounted",
+      "Finish": "Matte lacquer / Wood veneer",
+      "Drawers": "Soft-close",
+      "Cable Management": "Built-in",
+      "Width Options": "150 / 180 / 210 cm",
+      "TV Compatibility": "Up to 75 inch",
+      "Warranty": "1 Year"
+    },
+    "tags": ["tv", "storage", "media"]
+  },
+
+  "terrace-lounge-set": {
+    "name": "Terrace Lounge Set",
+    "category": "Outdoor",
+    "collection_page": "collection-outdoor.html",
+    "price": "From PKR 180,000",
+    "price_note": "Price for full set — sofa, 2 chairs, coffee table.",
+    "description": "The Terrace Lounge Set is crafted from premium teak with weatherproof cushions for year-round outdoor use. Designed for rooftops, terraces, and garden spaces — built to withstand the elements while looking stunning.",
+    "lead_time": "4–6 Weeks",
+    "images": [
+      "https://res.cloudinary.com/dplxa9j3r/image/upload/v1773602406/photo-1493663284031-b7e3aefcae8e_ohbmfo.jpg",
+      "https://res.cloudinary.com/dplxa9j3r/image/upload/v1773602334/3ef4bdbf-fb1e-48f4-b536-a3bbbe8c1cbf.png",
+      "https://res.cloudinary.com/dplxa9j3r/image/upload/v1773600972/647bd065-277c-4dd9-9053-1634bc29e3e4.png"
+    ],
+    "details": {
+      "Frame": "Grade A Teak",
+      "Cushions": "Weatherproof outdoor foam",
+      "Fabric": "UV-resistant — 5 colour options",
+      "Includes": "Sofa + 2 Chairs + Coffee Table",
+      "Maintenance": "Low — teak weathers naturally",
+      "Warranty": "2 Years"
+    },
+    "tags": ["outdoor", "lounge", "teak"]
+  }
+}
