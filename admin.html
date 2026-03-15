@@ -251,6 +251,18 @@ body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(
 
 /* ── JSON PREVIEW ── */
 .json-preview { background: var(--charcoal); color: var(--mint-light); padding: 24px; font-family: monospace; font-size: 12px; line-height: 1.7; overflow-x: auto; max-height: 400px; overflow-y: auto; white-space: pre; border-radius: 0; }
+
+/* slider start*/
+
+.sidebar { transition: transform 0.3s ease, width 0.3s ease; }
+.sidebar.collapsed { transform: translateX(-240px); }
+.main-content { transition: margin-left 0.3s ease; }
+.main-content.expanded { margin-left: 0; }
+.topbar { transition: left 0.3s ease; }
+.topbar.expanded { left: 0; }
+  
+/* slider end */
+
 </style>
 </head>
 <body>
