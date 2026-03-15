@@ -1,0 +1,37 @@
+{
+  "oslo-sofa": {
+    "name": "Oslo 3-Seater Sofa",
+    "category": "Sofas & Seating",
+    "collection_page": "collection-sofas.html",
+    "price": "From PKR 185,000",
+    "price_note": "Price varies by fabric & size.",
+    "description": "The Oslo Sofa is a masterclass in modern minimalism. Clean straight lines paired with deep plush cushions.",
+    "lead_time": "6–8 Weeks",
+    "images": [
+      "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=900&q=85"
+    ],
+    "details": {
+      "Frame": "Kiln-dried solid hardwood",
+      "Filling": "High-density foam",
+      "Warranty": "1 Year"
+    }
+  },
+  "002": {
+    "name": "Red sofa",
+    "category": "Sofas & Seating",
+    "collection_page": "collection-sofas.html",
+    "price": "150,000",
+    "price_note": "Price varies by size",
+    "description": "Make a bold statement in your living space with this striking red sofa, designed to combine modern elegance with everyday comfort. Upholstered in premium-quality fabric, the vibrant red tone instantly adds warmth, character, and a touch of luxury to any room.\n\nBuilt on a sturdy frame with generously cushioned seating, this sofa offers exceptional support and durability while maintaining a sleek, contemporary silhouette. The plush backrest and wide seating make it perfect for relaxing after a long day, entertaining guests, or elevating the overall look of your living area.\n\nWhether placed in a modern apartment, a stylish office lounge, or a sophisticated living room, this red sofa becomes the centerpiece that draws attention and complements your interior effortlessly.\n\nKey Features\n\nBold red upholstery for a striking modern look\n\nComfortable high-density cushioning\n\nStrong and durable frame construction\n\nSpacious seating for maximum comfort\n\nPerfect for living rooms, offices, and lounges\n\nIf you're selling furniture (which you said you are), here's the harsh truth: a generic description like this is still not enough to sell online. What actually converts buyers is:\n\nDimensions\n\nMaterial (velvet, leather, linen, etc.)\n\nFoam density\n\nFrame material\n\nSeating capacity\n\nDelivery time in Pakistan\n\nWithout those, your listing looks amateur.",
+    "lead_time": "1 week",
+    "images": [
+      "https://res.cloudinary.com/dplxa9j3r/image/upload/v1773605460/photo-1570198561490-40196f287d94_fqdzfn.jpg"
+    ],
+    "details": {
+      "Fabric": "Pine wood"
+    },
+    "tags": [
+      "sofas---seating"
+    ]
+  }
+}
