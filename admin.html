@@ -758,6 +758,16 @@ function showToast(msg, type = '') {
 document.getElementById('productModal').addEventListener('click', function(e) {
   if (e.target === this) closeModal();
 });
+
+  // slider adjust
+
+  let sidebarOpen = true;
+function toggleSidebar() {
+  sidebarOpen = !sidebarOpen;
+  document.querySelector('.sidebar').classList.toggle('collapsed', !sidebarOpen);
+  document.querySelector('.main-content').classList.toggle('expanded', !sidebarOpen);
+  document.querySelector('.topbar').classList.toggle('expanded', !sidebarOpen);
+}
 </script>
 </body>
 </html>
