@@ -61,6 +61,45 @@
 <!-- Gallery powered by Cloudinary -->
 <div class="gallery-grid" id="cld-gallery"></div>
 
+<!-- this is for json start -->
+
+<div class="gallery-grid" id="cld-gallery"></div>
+
+<script>
+// Map each Cloudinary image tag to a product ID in products.json
+const tagToProduct = {
+  "oslo-sofa": "oslo-sofa",
+  "cove-sectional": "cove-sectional",
+  "arc-lounge-chair": "arc-lounge-chair"
+};
+
+fetch('https://res.cloudinary.com/dplxa9j3r/image/list/sofas.json')
+  .then(res => res.json())
+  .then(data => {
+    const grid = document.getElementById('cld-gallery');
+    grid.innerHTML = '';
+    data.resources.forEach((img, i) => {
+      const url = `https://res.cloudinary.com/dplxa9j3r/image/upload/q_auto,f_auto/${img.public_id}`;
+      const filename = img.public_id.split('/').pop();
+      const productId = tagToProduct[filename] || null;
+      const clickAction = productId
+        ? `onclick="window.location='product.html?id=${productId}'"` 
+        : '';
+      grid.innerHTML += `
+        <div class="gallery-item" data-cat="all" ${clickAction} style="${productId ? 'cursor:pointer' : ''}">
+          <img src="${url}" alt="Sofa Design"/>
+          <div class="gallery-item-overlay">
+            <div class="overlay-tag">Sofas & Seating</div>
+            <div class="overlay-name">${filename.replace(/-/g,' ')}</div>
+            <div class="overlay-finish">${productId ? 'Click to view details' : ''}</div>
+          </div>
+        </div>`;
+    });
+  });
+</script>
+  
+<!-- this is for jason end -->
+  
 <script>
 fetch('https://res.cloudinary.com/dplxa9j3r/image/list/sofas.json')
   .then(res => res.json())
