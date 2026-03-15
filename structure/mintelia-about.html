@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About Us | Mintelia</title>
+<link rel="stylesheet" href="../styles/base.css">
+<link rel="stylesheet" href="../styles/structure.css">
+<style>
+#about-intro{padding:100px 8%;background:var(--white);display:grid;grid-template-columns:1fr 1fr;gap:100px;align-items:center;}
+.intro-label{font-size:11px;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:var(--mint);margin-bottom:16px;}
+.intro-title{font-family:'Cormorant Garamond',serif;font-size:clamp(34px,4vw,52px);font-weight:300;color:var(--charcoal);line-height:1.15;margin-bottom:24px;}
+.intro-title em{font-style:italic;color:var(--mint);}
+.intro-text{font-size:15px;font-weight:300;color:var(--charcoal-light);line-height:1.9;margin-bottom:20px;}
+.intro-pull{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:300;font-style:italic;color:var(--charcoal-mid);line-height:1.5;border-left:3px solid var(--mint);padding-left:28px;margin:32px 0;}
+.intro-img{position:relative;}
+.intro-img img{width:100%;height:480px;object-fit:cover;display:block;}
+.intro-stamp{position:absolute;bottom:-20px;right:-20px;background:var(--mint);padding:24px 28px;text-align:center;}
+.intro-stamp-num{font-family:'Cormorant Garamond',serif;font-size:40px;font-weight:300;color:var(--white);line-height:1;}
+.intro-stamp-text{font-size:10px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.8);margin-top:4px;}
+#mv{background:var(--cream);padding:100px 8%;display:grid;grid-template-columns:1fr 1fr;gap:2px;}
+.mv-card{background:var(--white);padding:64px 56px;position:relative;overflow:hidden;}
+.mv-card::before{content:'';position:absolute;top:0;left:0;width:4px;height:0;background:var(--mint);transition:height 0.5s ease;}
+.mv-card:hover::before{height:100%;}
+.mv-icon{margin-bottom:28px;}
+.mv-icon svg{width:36px;height:36px;stroke:var(--mint);fill:none;stroke-width:1.2;}
+.mv-label{font-size:11px;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:var(--mint);margin-bottom:16px;}
+.mv-name{font-family:'Cormorant Garamond',serif;font-size:34px;font-weight:300;color:var(--charcoal);margin-bottom:20px;line-height:1.2;}
+.mv-text{font-size:15px;font-weight:300;color:var(--charcoal-light);line-height:1.85;}
+#ab-stats{background:var(--charcoal);display:grid;grid-template-columns:repeat(4,1fr);}
+.ab-stat{padding:64px 40px;border-right:0.5px solid rgba(255,255,255,0.07);}
+.ab-stat:last-child{border-right:none;}
+.ab-stat-num{font-family:'Cormorant Garamond',serif;font-size:56px;font-weight:300;color:var(--mint-light);line-height:1;margin-bottom:10px;}
+.ab-stat-label{font-size:12px;font-weight:400;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.35);}
+#values{padding:100px 8%;background:var(--white);}
+.values-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:56px;}
+.val-card{background:var(--cream);padding:52px 44px;cursor:default;transition:background 0.3s;}
+.val-card:hover{background:var(--mint-pale);}
+.val-num{font-family:'Cormorant Garamond',serif;font-size:56px;font-weight:300;color:rgba(125,168,137,0.2);line-height:1;margin-bottom:16px;}
+.val-title{font-size:17px;font-weight:500;color:var(--charcoal);margin-bottom:12px;}
+.val-desc{font-size:14px;font-weight:300;color:var(--charcoal-light);line-height:1.85;}
+#team{padding:100px 8%;background:var(--cream);}
+.team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:56px;}
+.team-img-wrap{position:relative;overflow:hidden;aspect-ratio:3/4;margin-bottom:20px;}
+.team-img-wrap img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.6s;}
+.team-card:hover .team-img-wrap img{transform:scale(1.05);}
+.team-overlay{position:absolute;inset:0;background:rgba(26,26,23,0.55);display:flex;align-items:center;justify-content:center;gap:12px;opacity:0;transition:opacity 0.3s;}
+.team-card:hover .team-overlay{opacity:1;}
+.team-social{width:38px;height:38px;border:1px solid rgba(255,255,255,0.4);display:flex;align-items:center;justify-content:center;font-size:12px;color:white;text-decoration:none;}
+.team-name{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:400;color:var(--charcoal);margin-bottom:4px;}
+.team-role{font-size:12px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:var(--mint);margin-bottom:10px;}
+.team-bio{font-size:13px;font-weight:300;color:var(--charcoal-light);line-height:1.7;}
+#about-cta{background:var(--mint);padding:100px 8%;text-align:center;}
+#about-cta h2{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,4vw,56px);font-weight:300;color:var(--white);line-height:1.2;margin-bottom:20px;}
+#about-cta h2 em{font-style:italic;color:rgba(255,255,255,0.7);}
+#about-cta p{font-size:15px;font-weight:300;color:rgba(255,255,255,0.75);max-width:520px;margin:0 auto 48px;line-height:1.8;}
+.cta-row{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
+@media(max-width:1024px){#about-intro{grid-template-columns:1fr;gap:60px;}#mv{grid-template-columns:1fr;}#ab-stats{grid-template-columns:repeat(2,1fr);}  .values-grid{grid-template-columns:repeat(2,1fr);} .team-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:768px){.values-grid{grid-template-columns:1fr;}.team-grid{grid-template-columns:1fr 1fr;}}
+</style>
+</head>
+<body>
+<nav><a href="mintelia.html" class="nav-logo">Minteli<span>a</span></a><ul class="nav-links"><li><a href="mintelia-collections.html">Collections</a></li><li><a href="mintelia-about.html" class="active">About</a></li><li><a href="mintelia-services.html">Services</a></li><li><a href="mintelia-portfolio.html">Portfolio</a></li><li><a href="mintelia-contact.html">Contact</a></li></ul><a href="mintelia-contact.html" class="nav-cta">Get a Quote</a></nav>
+<div class="page-hero">
+  <div class="page-hero-bg" style="background-image:url('https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=1600&q=80');"></div>
+  <div class="page-hero-content">
+    <div>
+      <div class="breadcrumb"><a href="mintelia.html">Home</a><span class="breadcrumb-sep">›</span><span class="breadcrumb-current">About Us</span></div>
+      <p class="hero-tag">About Us</p>
+      <h1 class="page-hero-title">Our<br><em>Story</em></h1>
+      <p class="page-hero-desc">Mintelia was built on a belief that the spaces you live and work in shape how you feel every day.</p>
+    </div>
+  </div>
+</div>
+<section id="about-intro">
+  <div>
+    <div class="intro-label">Who We Are</div>
+    <h2 class="intro-title">Craftsmanship at the<br>heart of everything <em>we do</em></h2>
+    <p class="intro-text">Mintelia began in 2013 as a small workshop in Karachi with a single purpose: to create furniture that is as beautiful as it is functional. What started as a team of four passionate craftsmen has grown into a full-service furniture and interior fit-out company trusted by hundreds of clients.</p>
+    <div class="intro-pull">"We don't just make furniture — we create the backdrop for life's most important moments."</div>
+    <p class="intro-text">Every Mintelia piece begins with a conversation. We listen deeply to understand how you live, how you work, and what you value — then we design and build furniture that fits your world perfectly.</p>
+  </div>
+  <div class="intro-img">
+    <img src="https://images.unsplash.com/photo-1634642709649-a98c9b3a7e51?w=800&q=80" alt="Mintelia Workshop"/>
+    <div class="intro-stamp"><div class="intro-stamp-num">12</div><div class="intro-stamp-text">Years of<br>Excellence</div></div>
+  </div>
+</section>
+<section id="mv">
+  <div class="mv-card"><div class="mv-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div class="mv-label">Our Mission</div><div class="mv-name">To craft furniture that stands the test of time</div><p class="mv-text">We are dedicated to creating furniture of exceptional quality — thoughtfully designed, carefully built, and made to last for generations. We combine traditional craftsmanship with modern design thinking.</p></div>
+  <div class="mv-card"><div class="mv-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div><div class="mv-label">Our Vision</div><div class="mv-name">To be the most trusted name in furniture</div><p class="mv-text">We envision a world where every home and workspace is filled with furniture that brings genuine joy. Our goal is to be the first name that comes to mind when people think of quality and beautiful design.</p></div>
+</section>
+<section id="ab-stats">
+  <div class="ab-stat"><div class="ab-stat-num">3,400+</div><div class="ab-stat-label">Happy Clients</div></div>
+  <div class="ab-stat"><div class="ab-stat-num">850+</div><div class="ab-stat-label">Projects Completed</div></div>
+  <div class="ab-stat"><div class="ab-stat-num">40+</div><div class="ab-stat-label">Expert Craftsmen</div></div>
+  <div class="ab-stat"><div class="ab-stat-num">12</div><div class="ab-stat-label">Years of Experience</div></div>
+</section>
+<section id="values">
+  <div class="section-header"><p class="section-tag">What We Stand For</p><h2 class="section-title">Our core <em>values</em></h2></div>
+  <div class="values-grid">
+    <div class="val-card"><div class="val-num">01</div><div class="val-title">Uncompromising Quality</div><div class="val-desc">We never cut corners. Every joint, finish, and fabric is applied to the highest possible standard.</div></div>
+    <div class="val-card"><div class="val-num">02</div><div class="val-title">Client-First Thinking</div><div class="val-desc">Your vision drives everything. We listen carefully and make sure every piece reflects who you are.</div></div>
+    <div class="val-card"><div class="val-num">03</div><div class="val-title">Honest Craftsmanship</div><div class="val-desc">We are transparent about our materials, our process, and our timelines. What you see is what you get.</div></div>
+    <div class="val-card"><div class="val-num">04</div><div class="val-title">Sustainable Practice</div><div class="val-desc">We responsibly source our materials and work to minimize waste in our manufacturing process.</div></div>
+    <div class="val-card"><div class="val-num">05</div><div class="val-title">Design Excellence</div><div class="val-desc">Beautiful design is a standard, not a luxury. We push creative boundaries to deliver timeless results.</div></div>
+    <div class="val-card"><div class="val-num">06</div><div class="val-title">Long-Term Partnership</div><div class="val-desc">Our relationship doesn't end at delivery. We are here for maintenance and new projects for years to come.</div></div>
+  </div>
+</section>
+<section id="team">
+  <div class="section-header"><p class="section-tag">Meet the People</p><h2 class="section-title">The team behind <em>Mintelia</em></h2></div>
+  <div class="team-grid">
+    <div class="team-card"><div class="team-img-wrap"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80" alt="Omar"/><div class="team-overlay"><a href="#" class="team-social">Li</a><a href="#" class="team-social">Ig</a></div></div><div class="team-name">Omar Shaikh</div><div class="team-role">Founder & CEO</div><div class="team-bio">12 years in furniture design and manufacturing. Passionate about the intersection of art and function.</div></div>
+    <div class="team-card"><div class="team-img-wrap"><img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&q=80" alt="Zara"/><div class="team-overlay"><a href="#" class="team-social">Li</a><a href="#" class="team-social">Ig</a></div></div><div class="team-name">Zara Hussain</div><div class="team-role">Head of Design</div><div class="team-bio">Interior architect crafting spaces that balance elegance with everyday livability.</div></div>
+    <div class="team-card"><div class="team-img-wrap"><img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&q=80" alt="Ali"/><div class="team-overlay"><a href="#" class="team-social">Li</a><a href="#" class="team-social">Ig</a></div></div><div class="team-name">Ali Raza</div><div class="team-role">Operations Director</div><div class="team-bio">Ensures every project runs on time, on budget, and to the standard our clients expect.</div></div>
+    <div class="team-card"><div class="team-img-wrap"><img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&q=80" alt="Hina"/><div class="team-overlay"><a href="#" class="team-social">Li</a><a href="#" class="team-social">Ig</a></div></div><div class="team-name">Hina Malik</div><div class="team-role">Senior Project Manager</div><div class="team-bio">Your dedicated contact from first consultation to final installation.</div></div>
+  </div>
+</section>
+<section id="about-cta">
+  <h2>Ready to start your<br><em>project with us?</em></h2>
+  <p>Book a free consultation today and let our team design the perfect furniture solution for your space.</p>
+  <div class="cta-row"><a href="mintelia-contact.html" class="btn-white">Get a Free Quote</a><a href="https://wa.me/923210000000" class="btn-outline-white" target="_blank">Chat on WhatsApp</a></div>
+</section>
+<footer><div class="footer-top"><div><div class="footer-brand">Minteli<span>a</span></div><p class="footer-tagline">Premium furniture and bespoke interior solutions crafted for the way you live.</p></div><div><div class="footer-col-title">Collections</div><ul class="footer-links"><li><a href="mintelia-collections.html">All Collections</a></li><li><a href="../products/collection-sofas.html">Sofas</a></li><li><a href="../products/collection-bedroom.html">Bedroom</a></li><li><a href="../products/collection-dining.html">Dining</a></li></ul></div><div><div class="footer-col-title">Services</div><ul class="footer-links"><li><a href="mintelia-services.html">Interior Fit-Out</a></li><li><a href="mintelia-services.html">3D Design</a></li><li><a href="mintelia-services.html">Bespoke Manufacturing</a></li></ul></div><div><div class="footer-col-title">Company</div><ul class="footer-links"><li><a href="mintelia-about.html">About Us</a></li><li><a href="mintelia-portfolio.html">Portfolio</a></li><li><a href="mintelia-contact.html">Contact</a></li></ul></div></div><div class="footer-bottom"><div class="footer-copy">© 2025 Mintelia. All rights reserved.</div><div class="footer-socials"><a href="#">Ig</a><a href="#">Fb</a><a href="#">Pt</a><a href="#">Li</a></div></div></footer>
+<a href="https://wa.me/923210000000" class="float-wa" target="_blank"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg></a>
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Collections | Mintelia</title>
+<link rel="stylesheet" href="../styles/base.css">
+<link rel="stylesheet" href="../styles/structure.css">
+<style>
+#coll-main{padding:80px 5%;background:var(--white);}
+.coll-filter-bar{display:flex;align-items:center;justify-content:space-between;margin-bottom:48px;padding-bottom:24px;border-bottom:0.5px solid var(--border-strong);flex-wrap:wrap;gap:16px;}
+.results-count{font-size:13px;color:var(--charcoal-light);}
+.products-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;}
+.product-card{cursor:pointer;}
+.product-img-wrap{position:relative;overflow:hidden;aspect-ratio:4/5;background:var(--cream);margin-bottom:20px;}
+.product-img-wrap img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.6s;}
+.product-card:hover .product-img-wrap img{transform:scale(1.05);}
+.product-badge{position:absolute;top:16px;left:16px;font-size:10px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;padding:5px 12px;background:var(--mint);color:var(--white);}
+.product-badge.new{background:var(--charcoal);}
+.product-overlay{position:absolute;inset:0;background:rgba(26,26,23,0.5);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity 0.3s;}
+.product-card:hover .product-overlay{opacity:1;}
+.product-overlay-btn{font-size:12px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--white);border:1px solid rgba(255,255,255,0.7);padding:12px 28px;text-decoration:none;transition:background 0.2s;}
+.product-overlay-btn:hover{background:var(--mint);border-color:var(--mint);}
+.product-category{font-size:11px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--mint);margin-bottom:6px;}
+.product-name{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:400;color:var(--charcoal);margin-bottom:6px;}
+.product-desc{font-size:13px;font-weight:300;color:var(--charcoal-light);line-height:1.6;margin-bottom:12px;}
+.product-footer{display:flex;align-items:center;justify-content:space-between;}
+.product-price{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:300;color:var(--charcoal);}
+.product-price span{font-size:12px;font-family:'DM Sans',sans-serif;color:var(--charcoal-light);}
+.product-link{font-size:12px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:var(--mint);text-decoration:none;border-bottom:1px solid var(--mint);padding-bottom:1px;}
+#coll-cta{background:var(--charcoal);padding:100px 5%;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
+.coll-cta-text h2{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,4vw,54px);font-weight:300;color:var(--white);line-height:1.2;margin-bottom:20px;}
+.coll-cta-text h2 em{font-style:italic;color:var(--mint-light);}
+.coll-cta-text p{font-size:15px;font-weight:300;color:rgba(255,255,255,0.5);line-height:1.8;}
+.coll-cta-btns{display:flex;flex-direction:column;gap:16px;align-items:flex-start;}
+@media(max-width:1024px){.products-grid{grid-template-columns:repeat(2,1fr);}#coll-cta{grid-template-columns:1fr;gap:40px;}}
+@media(max-width:768px){.products-grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<nav><a href="mintelia.html" class="nav-logo">Minteli<span>a</span></a><ul class="nav-links"><li><a href="mintelia-collections.html" class="active">Collections</a></li><li><a href="mintelia-about.html">About</a></li><li><a href="mintelia-services.html">Services</a></li><li><a href="mintelia-portfolio.html">Portfolio</a></li><li><a href="mintelia-contact.html">Contact</a></li></ul><a href="mintelia-contact.html" class="nav-cta">Get a Quote</a></nav>
+<div class="page-hero">
+  <div class="page-hero-bg" style="background-image:url('https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=1600&q=80');"></div>
+  <div class="page-hero-content">
+    <div>
+      <div class="breadcrumb"><a href="mintelia.html">Home</a><span class="breadcrumb-sep">›</span><span class="breadcrumb-current">Collections</span></div>
+      <p class="hero-tag">Collections</p>
+      <h1 class="page-hero-title">All<br><em>Collections</em></h1>
+      <p class="page-hero-desc">Browse our complete range — sofas, bedroom, dining, office, storage and outdoor furniture.</p>
+    </div>
+  </div>
+</div>
+<section id="coll-main">
+  <div class="coll-filter-bar">
+    <div class="filter-tabs">
+      <button class="filter-tab active" onclick="filterP(this,'all')">All</button>
+      <button class="filter-tab" onclick="filterP(this,'sofa')">Sofas</button>
+      <button class="filter-tab" onclick="filterP(this,'bedroom')">Bedroom</button>
+      <button class="filter-tab" onclick="filterP(this,'dining')">Dining</button>
+      <button class="filter-tab" onclick="filterP(this,'office')">Office</button>
+      <button class="filter-tab" onclick="filterP(this,'storage')">Storage</button>
+    </div>
+    <div class="results-count" id="rCount">Showing 6 collections</div>
+  </div>
+  <div class="products-grid" id="prodGrid">
+    <div class="product-card" data-cat="sofa" onclick="window.location='../products/collection-sofas.html'"><div class="product-img-wrap"><img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=600&q=80" alt="Sofas"/><span class="product-badge new">New</span><div class="product-overlay"><a href="../products/collection-sofas.html" class="product-overlay-btn">View Gallery</a></div></div><div class="product-category">Sofas & Seating</div><div class="product-name">Sofa Collection</div><div class="product-desc">24 bespoke sofa designs — modern, classic, sectional, and lounge styles.</div><div class="product-footer"><div class="product-price">From PKR 65,000 <span>/ piece</span></div><a href="../products/collection-sofas.html" class="product-link">View →</a></div></div>
+    <div class="product-card" data-cat="bedroom" onclick="window.location='../products/collection-bedroom.html'"><div class="product-img-wrap"><img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=600&q=80" alt="Bedroom"/><div class="product-overlay"><a href="../products/collection-bedroom.html" class="product-overlay-btn">View Gallery</a></div></div><div class="product-category">Bedroom</div><div class="product-name">Bedroom Collection</div><div class="product-desc">18 bedroom designs — beds, wardrobes, and full bedroom sets.</div><div class="product-footer"><div class="product-price">From PKR 85,000 <span>/ piece</span></div><a href="../products/collection-bedroom.html" class="product-link">View →</a></div></div>
+    <div class="product-card" data-cat="dining" onclick="window.location='../products/collection-dining.html'"><div class="product-img-wrap"><img src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=600&q=80" alt="Dining"/><span class="product-badge">Popular</span><div class="product-overlay"><a href="../products/collection-dining.html" class="product-overlay-btn">View Gallery</a></div></div><div class="product-category">Dining</div><div class="product-name">Dining Collection</div><div class="product-desc">15 dining designs — tables, chairs, and bar stools for every setting.</div><div class="product-footer"><div class="product-price">From PKR 28,000 <span>/ piece</span></div><a href="../products/collection-dining.html" class="product-link">View →</a></div></div>
+    <div class="product-card" data-cat="office" onclick="window.location='../products/collection-office.html'"><div class="product-img-wrap"><img src="https://images.unsplash.com/photo-1593642632559-0c6d3fc62b89?w=600&q=80" alt="Office"/><span class="product-badge new">New</span><div class="product-overlay"><a href="../products/collection-office.html" class="product-overlay-btn">View Gallery</a></div></div><div class="product-category">Office</div><div class="product-name">Office Collection</div><div class="product-desc">12 office designs — desks, chairs, and meeting room furniture.</div><div class="product-footer"><div class="product-price">From PKR 42,000 <span>/ piece</span></div><a href="../products/collection-office.html" class="product-link">View →</a></div></div>
+    <div class="product-card" data-cat="storage" onclick="window.location='../products/collection-storage.html'"><div class="product-img-wrap"><img src="https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?w=600&q=80" alt="Storage"/><div class="product-overlay"><a href="../products/collection-storage.html" class="product-overlay-btn">View Gallery</a></div></div><div class="product-category">Storage & Shelving</div><div class="product-name">Storage Collection</div><div class="product-desc">20 storage designs — shelving, TV units, sideboards, and cabinets.</div><div class="product-footer"><div class="product-price">From PKR 48,000 <span>/ piece</span></div><a href="../products/collection-storage.html" class="product-link">View →</a></div></div>
+    <div class="product-card" data-cat="outdoor" onclick="window.location='../products/collection-outdoor.html'"><div class="product-img-wrap"><img src="https://images.unsplash.com/photo-1600121848594-d8644e57abab?w=600&q=80" alt="Outdoor"/><div class="product-overlay"><a href="../products/collection-outdoor.html" class="product-overlay-btn">View Gallery</a></div></div><div class="product-category">Outdoor</div><div class="product-name">Outdoor Collection</div><div class="product-desc">10 outdoor designs — terrace, poolside, and garden furniture.</div><div class="product-footer"><div class="product-price">From PKR 35,000 <span>/ piece</span></div><a href="../products/collection-outdoor.html" class="product-link">View →</a></div></div>
+  </div>
+</section>
+<section id="coll-cta">
+  <div class="coll-cta-text"><h2>Can't find what you're<br>looking for? <em>Let's build it.</em></h2><p>Every Mintelia piece can be customized. If you have a vision, we have the skills to bring it to life. Bespoke service starts with a free consultation.</p></div>
+  <div class="coll-cta-btns"><a href="mintelia-contact.html" class="btn-mint">Request Custom Quote</a><a href="https://wa.me/923210000000" class="btn-ghost-white" target="_blank">Chat on WhatsApp</a></div>
+</section>
+<footer><div class="footer-top"><div><div class="footer-brand">Minteli<span>a</span></div><p class="footer-tagline">Premium furniture and bespoke interior solutions crafted for the way you live.</p></div><div><div class="footer-col-title">Collections</div><ul class="footer-links"><li><a href="mintelia-collections.html">All Collections</a></li><li><a href="../products/collection-sofas.html">Sofas</a></li><li><a href="../products/collection-bedroom.html">Bedroom</a></li><li><a href="../products/collection-dining.html">Dining</a></li></ul></div><div><div class="footer-col-title">Services</div><ul class="footer-links"><li><a href="mintelia-services.html">Interior Fit-Out</a></li><li><a href="mintelia-services.html">3D Design</a></li><li><a href="mintelia-services.html">Bespoke Manufacturing</a></li></ul></div><div><div class="footer-col-title">Company</div><ul class="footer-links"><li><a href="mintelia-about.html">About Us</a></li><li><a href="mintelia-portfolio.html">Portfolio</a></li><li><a href="mintelia-contact.html">Contact</a></li></ul></div></div><div class="footer-bottom"><div class="footer-copy">© 2025 Mintelia. All rights reserved.</div><div class="footer-socials"><a href="#">Ig</a><a href="#">Fb</a><a href="#">Pt</a><a href="#">Li</a></div></div></footer>
+<a href="https://wa.me/923210000000" class="float-wa" target="_blank"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg></a>
+<script>
+function filterP(btn,cat){
+  document.querySelectorAll('.filter-tab').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  const cards=document.querySelectorAll('.product-card');
+  let c=0;
+  cards.forEach(card=>{if(cat==='all'||card.dataset.cat===cat){card.style.display='block';c++;}else{card.style.display='none';}}); 
+  document.getElementById('rCount').textContent='Showing '+c+' collections';
+}
+</script>
+</body>
+</html>

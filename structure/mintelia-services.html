@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Services | Mintelia</title>
+<link rel="stylesheet" href="../styles/base.css">
+<link rel="stylesheet" href="../styles/structure.css">
+<style>
+#svc-intro{padding:100px 8%;background:var(--white);display:grid;grid-template-columns:1fr 1fr;gap:100px;align-items:center;}
+.svc-intro-label{font-size:11px;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:var(--mint);margin-bottom:16px;}
+.svc-intro-title{font-family:'Cormorant Garamond',serif;font-size:clamp(34px,4vw,52px);font-weight:300;color:var(--charcoal);line-height:1.15;margin-bottom:24px;}
+.svc-intro-title em{font-style:italic;color:var(--mint);}
+.svc-intro-text{font-size:15px;font-weight:300;color:var(--charcoal-light);line-height:1.9;margin-bottom:16px;}
+.svc-intro-img{position:relative;}
+.svc-intro-img img{width:100%;height:480px;object-fit:cover;display:block;}
+.svc-badge{position:absolute;bottom:-20px;right:-20px;background:var(--mint);padding:24px 28px;text-align:center;}
+.svc-badge-num{font-family:'Cormorant Garamond',serif;font-size:40px;font-weight:300;color:var(--white);line-height:1;}
+.svc-badge-txt{font-size:10px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.8);margin-top:4px;}
+#svc-list{padding:100px 5%;background:var(--cream);}
+.svc-feature{display:grid;grid-template-columns:1fr 1fr;gap:0;margin-bottom:2px;background:var(--white);}
+.svc-feature:nth-child(even){direction:rtl;}
+.svc-feature:nth-child(even) .svc-feature-content{direction:ltr;}
+.svc-feature-img{overflow:hidden;aspect-ratio:16/10;}
+.svc-feature-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.6s;}
+.svc-feature:hover .svc-feature-img img{transform:scale(1.04);}
+.svc-feature-content{padding:64px 56px;display:flex;flex-direction:column;justify-content:center;}
+.svc-num{font-family:'Cormorant Garamond',serif;font-size:64px;font-weight:300;color:rgba(125,168,137,0.15);line-height:1;margin-bottom:16px;}
+.svc-label{font-size:11px;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:var(--mint);margin-bottom:12px;}
+.svc-name{font-family:'Cormorant Garamond',serif;font-size:34px;font-weight:300;color:var(--charcoal);line-height:1.2;margin-bottom:16px;}
+.svc-desc{font-size:14px;font-weight:300;color:var(--charcoal-light);line-height:1.85;margin-bottom:28px;}
+.svc-ul{list-style:none;margin-bottom:28px;}
+.svc-ul li{font-size:13px;font-weight:300;color:var(--charcoal-mid);padding:7px 0;border-bottom:0.5px solid var(--border);display:flex;align-items:center;gap:10px;}
+.svc-ul li::before{content:'';display:block;width:6px;height:6px;border-radius:50%;background:var(--mint);flex-shrink:0;}
+.svc-link{font-size:12px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--charcoal);text-decoration:none;border-bottom:1px solid var(--charcoal);padding-bottom:2px;display:inline-block;transition:color 0.2s,border-color 0.2s;}
+.svc-link:hover{color:var(--mint);border-color:var(--mint);}
+#process{padding:100px 5%;background:var(--charcoal);}
+#svc-pricing{padding:100px 5%;background:var(--white);}
+.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--border);margin-top:56px;}
+.pricing-card{background:var(--white);padding:52px 44px;}
+.pricing-card.featured{background:var(--charcoal);}
+.pricing-tier{font-size:11px;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:var(--mint);margin-bottom:12px;}
+.pricing-card.featured .pricing-tier{color:var(--mint-light);}
+.pricing-name{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:300;color:var(--charcoal);margin-bottom:16px;}
+.pricing-card.featured .pricing-name{color:var(--white);}
+.pricing-desc{font-size:14px;font-weight:300;color:var(--charcoal-light);line-height:1.8;margin-bottom:28px;padding-bottom:28px;border-bottom:0.5px solid var(--border);}
+.pricing-card.featured .pricing-desc{color:rgba(255,255,255,0.5);border-color:rgba(255,255,255,0.1);}
+.pricing-ul{list-style:none;margin-bottom:36px;}
+.pricing-ul li{font-size:13px;font-weight:300;color:var(--charcoal-mid);padding:8px 0;border-bottom:0.5px solid var(--border);display:flex;align-items:center;gap:10px;}
+.pricing-card.featured .pricing-ul li{color:rgba(255,255,255,0.6);border-color:rgba(255,255,255,0.08);}
+.pricing-ul li::before{content:'';display:block;width:5px;height:5px;border-radius:50%;background:var(--mint);flex-shrink:0;}
+.pricing-btn{display:block;text-align:center;font-size:12px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;padding:14px 28px;text-decoration:none;transition:all 0.2s;}
+.pricing-btn-dark{color:var(--white);background:var(--charcoal);}
+.pricing-btn-dark:hover{background:var(--mint);}
+.pricing-btn-light{color:var(--charcoal);background:var(--white);}
+.pricing-btn-light:hover{background:var(--mint);color:var(--white);}
+#svc-cta{background:var(--mint);padding:100px 5%;text-align:center;}
+#svc-cta h2{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,4vw,56px);font-weight:300;color:var(--white);line-height:1.2;margin-bottom:20px;}
+#svc-cta h2 em{font-style:italic;color:rgba(255,255,255,0.7);}
+#svc-cta p{font-size:15px;font-weight:300;color:rgba(255,255,255,0.75);max-width:520px;margin:0 auto 48px;line-height:1.8;}
+.cta-row{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
+@media(max-width:1024px){#svc-intro{grid-template-columns:1fr;gap:60px;}.svc-feature{grid-template-columns:1fr;}.svc-feature:nth-child(even){direction:ltr;}.pricing-grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<nav><a href="mintelia.html" class="nav-logo">Minteli<span>a</span></a><ul class="nav-links"><li><a href="mintelia-collections.html">Collections</a></li><li><a href="mintelia-about.html">About</a></li><li><a href="mintelia-services.html" class="active">Services</a></li><li><a href="mintelia-portfolio.html">Portfolio</a></li><li><a href="mintelia-contact.html">Contact</a></li></ul><a href="mintelia-contact.html" class="nav-cta">Get a Quote</a></nav>
+<div class="page-hero">
+  <div class="page-hero-bg" style="background-image:url('https://images.unsplash.com/photo-1634642709649-a98c9b3a7e51?w=1600&q=80');"></div>
+  <div class="page-hero-content">
+    <div>
+      <div class="breadcrumb"><a href="mintelia.html">Home</a><span class="breadcrumb-sep">›</span><span class="breadcrumb-current">Services</span></div>
+      <p class="hero-tag">Services</p>
+      <h1 class="page-hero-title">A complete furniture<br><em>solution</em></h1>
+      <p class="page-hero-desc">From concept to installation — we handle every step of your furniture journey with care and expertise.</p>
+    </div>
+  </div>
+</div>
+<section id="svc-intro">
+  <div><div class="svc-intro-label">Why Mintelia</div><h2 class="svc-intro-title">Everything under<br>one <em>roof</em></h2><p class="svc-intro-text">Unlike most furniture stores, Mintelia doesn't just sell you a product — we walk with you from the very first sketch to the final installation. Our in-house team of designers, craftsmen, and project managers ensures a seamless experience at every step.</p><p class="svc-intro-text">Whether you need a single bespoke sofa or a complete fit-out for your office, we bring the same level of dedication and quality to every project.</p></div>
+  <div class="svc-intro-img"><img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=800&q=80" alt="Service"/><div class="svc-badge"><div class="svc-badge-num">850+</div><div class="svc-badge-txt">Projects<br>Delivered</div></div></div>
+</section>
+<section id="svc-list">
+  <div class="section-header"><p class="section-tag">Our Services</p><h2 class="section-title">Everything we <em>do</em></h2></div>
+  <div class="svc-feature"><div class="svc-feature-img"><img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=800&q=80" alt="Fit-Out"/></div><div class="svc-feature-content"><div class="svc-num">01</div><div class="svc-label">Full Service</div><div class="svc-name">Interior Fit-Out</div><p class="svc-desc">Complete furniture and interior fit-out solutions for homes, apartments, offices, and commercial spaces — design, manufacturing, delivery, and installation all in one.</p><ul class="svc-ul"><li>Full space planning and layout design</li><li>Custom furniture manufacturing</li><li>Site supervision and installation</li><li>Post-project walkthrough and handover</li></ul><a href="mintelia-contact.html" class="svc-link">Request a Consultation →</a></div></div>
+  <div class="svc-feature"><div class="svc-feature-img"><img src="https://images.unsplash.com/photo-1634642709649-a98c9b3a7e51?w=800&q=80" alt="3D Design"/></div><div class="svc-feature-content"><div class="svc-num">02</div><div class="svc-label">Visualization</div><div class="svc-name">3D Design & Visualization</div><p class="svc-desc">See your space before a single piece is built. Photorealistic 3D renders and detailed floor plans so you can visualize every detail before approving the final design.</p><ul class="svc-ul"><li>Photorealistic 3D room renders</li><li>Detailed floor plan drawings</li><li>Material and finish mockups</li><li>Unlimited revisions until approval</li></ul><a href="mintelia-contact.html" class="svc-link">Get a 3D Preview →</a></div></div>
+  <div class="svc-feature"><div class="svc-feature-img"><img src="https://images.unsplash.com/photo-1504148455328-c376907d081c?w=800&q=80" alt="Bespoke"/></div><div class="svc-feature-content"><div class="svc-num">03</div><div class="svc-label">Custom Made</div><div class="svc-name">Bespoke Manufacturing</div><p class="svc-desc">Every Mintelia piece can be custom-built to your exact specifications — size, material, finish, and hardware — crafted in our Karachi workshop.</p><ul class="svc-ul"><li>Made-to-measure dimensions</li><li>Choice of 50+ materials and finishes</li><li>Handcrafted by our expert artisans</li><li>6–8 week average lead time</li></ul><a href="mintelia-contact.html" class="svc-link">Start Your Custom Order →</a></div></div>
+  <div class="svc-feature"><div class="svc-feature-img"><img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80" alt="Office"/></div><div class="svc-feature-content"><div class="svc-num">04</div><div class="svc-label">Commercial</div><div class="svc-name">Office & Commercial Fit-Out</div><p class="svc-desc">We transform workspaces into environments that boost productivity and reflect your brand — from executive offices to open-plan coworking spaces.</p><ul class="svc-ul"><li>Workstation and seating solutions</li><li>Reception and meeting room furniture</li><li>Branded and themed environments</li><li>Weekend and off-hours installation</li></ul><a href="mintelia-contact.html" class="svc-link">Get an Office Quote →</a></div></div>
+</section>
+<section id="process">
+  <div class="section-header"><p class="section-tag light">How It Works</p><h2 class="section-title light">Our simple <em>process</em></h2></div>
+  <div class="process-steps">
+    <div class="process-step"><div class="step-num">01</div><div class="step-title">Free Consultation</div><div class="step-desc">We discuss your vision, space, and budget in a no-obligation consultation.</div></div>
+    <div class="process-step"><div class="step-num">02</div><div class="step-title">Design & 3D</div><div class="step-desc">Our designers produce floor plans and 3D renders for your approval.</div></div>
+    <div class="process-step"><div class="step-num">03</div><div class="step-title">Manufacturing</div><div class="step-desc">Our craftsmen build your furniture using premium materials.</div></div>
+    <div class="process-step"><div class="step-num">04</div><div class="step-title">Quality Check</div><div class="step-desc">Every piece passes a 12-point inspection before leaving our facility.</div></div>
+    <div class="process-step"><div class="step-num">05</div><div class="step-title">Installation</div><div class="step-desc">White-glove delivery and professional installation by our team.</div></div>
+  </div>
+</section>
+<section id="svc-pricing">
+  <div class="section-header"><p class="section-tag">Packages</p><h2 class="section-title">Choose your <em>package</em></h2></div>
+  <div class="pricing-grid">
+    <div class="pricing-card"><div class="pricing-tier">Starter</div><div class="pricing-name">Single Room</div><div class="pricing-desc">Perfect for one-room projects — bedroom, living room, or home office.</div><ul class="pricing-ul"><li>One room fit-out</li><li>2D floor plan</li><li>Up to 5 custom pieces</li><li>White-glove installation</li><li>3-month warranty</li></ul><a href="mintelia-contact.html" class="pricing-btn pricing-btn-dark">Get a Quote</a></div>
+    <div class="pricing-card featured"><div class="pricing-tier">Most Popular</div><div class="pricing-name">Full Home</div><div class="pricing-desc">Complete home furniture solution — every room designed and furnished.</div><ul class="pricing-ul"><li>Full home fit-out</li><li>3D renders + floor plans</li><li>Unlimited custom pieces</li><li>Dedicated project manager</li><li>1-year warranty</li></ul><a href="mintelia-contact.html" class="pricing-btn pricing-btn-light">Get a Quote</a></div>
+    <div class="pricing-card"><div class="pricing-tier">Commercial</div><div class="pricing-name">Business & Office</div><div class="pricing-desc">Tailored for offices, restaurants, hotels, and retail spaces.</div><ul class="pricing-ul"><li>Full commercial fit-out</li><li>Brand-aligned design</li><li>Bulk manufacturing rates</li><li>Off-hours installation</li><li>2-year commercial warranty</li></ul><a href="mintelia-contact.html" class="pricing-btn pricing-btn-dark">Get a Quote</a></div>
+  </div>
+</section>
+<section id="svc-cta">
+  <h2>Ready to start your<br><em>project with us?</em></h2>
+  <p>Book a free consultation today and let our team design the perfect furniture solution for your space.</p>
+  <div class="cta-row"><a href="mintelia-contact.html" class="btn-white">Book Free Consultation</a><a href="https://wa.me/923210000000" class="btn-outline-white" target="_blank">Chat on WhatsApp</a></div>
+</section>
+<footer><div class="footer-top"><div><div class="footer-brand">Minteli<span>a</span></div><p class="footer-tagline">Premium furniture and bespoke interior solutions crafted for the way you live.</p></div><div><div class="footer-col-title">Collections</div><ul class="footer-links"><li><a href="mintelia-collections.html">All Collections</a></li><li><a href="../products/collection-sofas.html">Sofas</a></li><li><a href="../products/collection-bedroom.html">Bedroom</a></li><li><a href="../products/collection-dining.html">Dining</a></li></ul></div><div><div class="footer-col-title">Services</div><ul class="footer-links"><li><a href="mintelia-services.html">Interior Fit-Out</a></li><li><a href="mintelia-services.html">3D Design</a></li><li><a href="mintelia-services.html">Bespoke Manufacturing</a></li></ul></div><div><div class="footer-col-title">Company</div><ul class="footer-links"><li><a href="mintelia-about.html">About Us</a></li><li><a href="mintelia-portfolio.html">Portfolio</a></li><li><a href="mintelia-contact.html">Contact</a></li></ul></div></div><div class="footer-bottom"><div class="footer-copy">© 2025 Mintelia. All rights reserved.</div><div class="footer-socials"><a href="#">Ig</a><a href="#">Fb</a><a href="#">Pt</a><a href="#">Li</a></div></div></footer>
+<a href="https://wa.me/923210000000" class="float-wa" target="_blank"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg></a>
+</body>
+</html>

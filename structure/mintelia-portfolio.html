@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio | Mintelia</title>
+<link rel="stylesheet" href="../styles/base.css">
+<link rel="stylesheet" href="../styles/structure.css">
+<style>
+#port-main{padding:80px 5%;background:var(--white);}
+.port-filter-bar{display:flex;align-items:center;justify-content:space-between;margin-bottom:48px;padding-bottom:24px;border-bottom:0.5px solid var(--border-strong);flex-wrap:wrap;gap:16px;}
+.port-masonry{columns:3;gap:16px;}
+.port-item{break-inside:avoid;margin-bottom:16px;position:relative;overflow:hidden;cursor:pointer;}
+.port-item img{width:100%;display:block;transition:transform 0.6s;}
+.port-item:hover img{transform:scale(1.04);}
+.port-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(26,26,23,0.85) 0%,transparent 50%);display:flex;flex-direction:column;justify-content:flex-end;padding:28px;opacity:0;transition:opacity 0.3s;}
+.port-item:hover .port-overlay{opacity:1;}
+.port-cat{font-size:10px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--mint-light);margin-bottom:6px;}
+.port-name{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:400;color:#fff;margin-bottom:4px;}
+.port-meta{font-size:12px;color:rgba(255,255,255,0.5);}
+#featured{padding:100px 5%;background:var(--cream);}
+.feat-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;}
+.feat-main img{width:100%;height:100%;object-fit:cover;display:block;}
+.feat-sub img{width:100%;object-fit:cover;display:block;aspect-ratio:4/3;}
+.feat-info{background:var(--charcoal);padding:48px;display:flex;flex-direction:column;justify-content:center;}
+.feat-label{font-size:11px;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:var(--mint-light);margin-bottom:12px;}
+.feat-name{font-family:'Cormorant Garamond',serif;font-size:34px;font-weight:300;color:var(--white);line-height:1.2;margin-bottom:16px;}
+.feat-desc{font-size:14px;font-weight:300;color:rgba(255,255,255,0.5);line-height:1.8;margin-bottom:24px;}
+.feat-stats{display:flex;gap:32px;}
+.fstat-num{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:300;color:var(--mint-light);line-height:1;}
+.fstat-label{font-size:11px;color:rgba(255,255,255,0.35);letter-spacing:0.08em;text-transform:uppercase;margin-top:4px;}
+#port-reviews{background:var(--charcoal);padding:80px 5%;}
+.rev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:56px;}
+.rev-card{padding:36px;border:0.5px solid rgba(255,255,255,0.08);}
+.rev-quote{font-family:'Cormorant Garamond',serif;font-size:60px;line-height:0.6;color:var(--mint);opacity:0.3;margin-bottom:20px;display:block;}
+.rev-text{font-size:14px;font-weight:300;color:rgba(255,255,255,0.6);line-height:1.8;margin-bottom:24px;font-style:italic;}
+.rev-author{display:flex;align-items:center;gap:12px;}
+.rev-avatar{width:40px;height:40px;border-radius:50%;background:rgba(125,168,137,0.2);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:14px;color:var(--mint-light);}
+.rev-name{font-size:13px;font-weight:500;color:var(--white);}
+.rev-role{font-size:11px;color:rgba(255,255,255,0.35);margin-top:2px;}
+.rev-stars{color:var(--mint);font-size:11px;margin-bottom:14px;letter-spacing:2px;}
+#port-cta{background:var(--mint);padding:100px 5%;text-align:center;}
+#port-cta h2{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,4vw,56px);font-weight:300;color:var(--white);line-height:1.2;margin-bottom:20px;}
+#port-cta h2 em{font-style:italic;color:rgba(255,255,255,0.7);}
+#port-cta p{font-size:15px;font-weight:300;color:rgba(255,255,255,0.75);max-width:520px;margin:0 auto 48px;line-height:1.8;}
+.cta-row{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
+@media(max-width:1024px){.port-masonry{columns:2;}.feat-grid{grid-template-columns:1fr;}.rev-grid{grid-template-columns:1fr;}}
+@media(max-width:768px){.port-masonry{columns:1;}}
+</style>
+</head>
+<body>
+<nav><a href="mintelia.html" class="nav-logo">Minteli<span>a</span></a><ul class="nav-links"><li><a href="mintelia-collections.html">Collections</a></li><li><a href="mintelia-about.html">About</a></li><li><a href="mintelia-services.html">Services</a></li><li><a href="mintelia-portfolio.html" class="active">Portfolio</a></li><li><a href="mintelia-contact.html">Contact</a></li></ul><a href="mintelia-contact.html" class="nav-cta">Get a Quote</a></nav>
+<div class="page-hero">
+  <div class="page-hero-bg" style="background-image:url('https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=1600&q=80');"></div>
+  <div class="page-hero-content">
+    <div>
+      <div class="breadcrumb"><a href="mintelia.html">Home</a><span class="breadcrumb-sep">›</span><span class="breadcrumb-current">Portfolio</span></div>
+      <p class="hero-tag">Portfolio</p>
+      <h1 class="page-hero-title">Projects we're<br><em>proud of</em></h1>
+      <p class="page-hero-desc">850+ completed projects across Karachi — each one a testament to our craft and care.</p>
+    </div>
+  </div>
+</div>
+<section id="port-main">
+  <div class="port-filter-bar">
+    <div class="filter-tabs">
+      <button class="filter-tab active" onclick="filterPort(this,'all')">All Projects</button>
+      <button class="filter-tab" onclick="filterPort(this,'res')">Residential</button>
+      <button class="filter-tab" onclick="filterPort(this,'com')">Commercial</button>
+      <button class="filter-tab" onclick="filterPort(this,'hos')">Hospitality</button>
+      <button class="filter-tab" onclick="filterPort(this,'off')">Office</button>
+    </div>
+  </div>
+  <div class="port-masonry" id="portGrid">
+    <div class="port-item" data-cat="res"><img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=600&q=80" alt="Villa"/><div class="port-overlay"><div class="port-cat">Residential · Full Fit-Out</div><div class="port-name">Modern Villa, DHA Phase 6</div><div class="port-meta">Karachi · 2024</div></div></div>
+    <div class="port-item" data-cat="off"><img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&q=80" alt="Office"/><div class="port-overlay"><div class="port-cat">Commercial · Office</div><div class="port-name">Tech Startup HQ</div><div class="port-meta">Karachi · 2024</div></div></div>
+    <div class="port-item" data-cat="res"><img src="https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=600&q=80" alt="Bedroom"/><div class="port-overlay"><div class="port-cat">Residential · Bedroom</div><div class="port-name">Penthouse Bedroom Suite</div><div class="port-meta">Clifton · 2024</div></div></div>
+    <div class="port-item" data-cat="hos"><img src="https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?w=600&q=80" alt="Dining"/><div class="port-overlay"><div class="port-cat">Hospitality · Restaurant</div><div class="port-name">Private Dining Room</div><div class="port-meta">Defence · 2023</div></div></div>
+    <div class="port-item" data-cat="res"><img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600&q=80" alt="Kitchen"/><div class="port-overlay"><div class="port-cat">Residential · Kitchen</div><div class="port-name">Contemporary Kitchen</div><div class="port-meta">Gulshan · 2023</div></div></div>
+    <div class="port-item" data-cat="com"><img src="https://images.unsplash.com/photo-1600121848594-d8644e57abab?w=600&q=80" alt="Retail"/><div class="port-overlay"><div class="port-cat">Commercial · Retail</div><div class="port-name">Fashion Boutique Fit-Out</div><div class="port-meta">Zamzama · 2023</div></div></div>
+    <div class="port-item" data-cat="off"><img src="https://images.unsplash.com/photo-1593642632559-0c6d3fc62b89?w=600&q=80" alt="Law Firm"/><div class="port-overlay"><div class="port-cat">Commercial · Office</div><div class="port-name">Law Firm Boardroom</div><div class="port-meta">SMCHS · 2023</div></div></div>
+    <div class="port-item" data-cat="res"><img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=600&q=80" alt="Apartment"/><div class="port-overlay"><div class="port-cat">Residential · Full Fit-Out</div><div class="port-name">Modern Apartment</div><div class="port-meta">Clifton · 2023</div></div></div>
+    <div class="port-item" data-cat="hos"><img src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=600&q=80" alt="Hotel"/><div class="port-overlay"><div class="port-cat">Hospitality · Hotel</div><div class="port-name">Boutique Hotel Lobby</div><div class="port-meta">Karachi · 2022</div></div></div>
+  </div>
+</section>
+<section id="featured">
+  <div class="section-header"><p class="section-tag">Featured Project</p><h2 class="section-title">Modern Villa, <em>DHA Phase 6</em></h2></div>
+  <div class="feat-grid">
+    <div class="feat-main"><img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=900&q=80" alt="Featured"/></div>
+    <div><div class="feat-sub"><img src="https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=600&q=80" alt="Bedroom"/></div>
+    <div class="feat-info"><div class="feat-label">Full Home Fit-Out · 2024</div><div class="feat-name">6-Bedroom Villa,<br>DHA Phase 6, Karachi</div><p class="feat-desc">Complete furniture and fit-out for a 6,000 sq ft contemporary villa. Every room custom designed and furnished.</p><div class="feat-stats"><div><div class="fstat-num">6,000</div><div class="fstat-label">Sq Ft</div></div><div><div class="fstat-num">14</div><div class="fstat-label">Rooms</div></div><div><div class="fstat-num">8</div><div class="fstat-label">Weeks</div></div></div></div></div>
+  </div>
+</section>
+<section id="port-reviews">
+  <div class="section-header"><p class="section-tag light">Client Stories</p><h2 class="section-title light">What our clients <em>say</em></h2></div>
+  <div class="rev-grid">
+    <div class="rev-card"><span class="rev-quote">"</span><div class="rev-stars">★★★★★</div><p class="rev-text">Mintelia transformed our villa completely. Every piece was crafted with incredible attention to detail.</p><div class="rev-author"><div class="rev-avatar">SA</div><div><div class="rev-name">Sara Ansari</div><div class="rev-role">Homeowner, DHA</div></div></div></div>
+    <div class="rev-card"><span class="rev-quote">"</span><div class="rev-stars">★★★★★</div><p class="rev-text">We hired Mintelia for our office fit-out and they delivered a workspace our team genuinely loves.</p><div class="rev-author"><div class="rev-avatar">RK</div><div><div class="rev-name">Raza Khan</div><div class="rev-role">CEO, Horizon Digital</div></div></div></div>
+    <div class="rev-card"><span class="rev-quote">"</span><div class="rev-stars">★★★★★</div><p class="rev-text">From consultation to delivery, the experience was seamless. Truly world-class furniture company.</p><div class="rev-author"><div class="rev-avatar">NM</div><div><div class="rev-name">Nadia Malik</div><div class="rev-role">Interior Architect</div></div></div></div>
+  </div>
+</section>
+<section id="port-cta">
+  <h2>Love what you see?<br><em>Let's build yours.</em></h2>
+  <p>Every project starts with a free consultation. Tell us your vision and we'll bring it to life.</p>
+  <div class="cta-row"><a href="mintelia-contact.html" class="btn-white">Start a Project</a><a href="https://wa.me/923210000000" class="btn-outline-white" target="_blank">Chat on WhatsApp</a></div>
+</section>
+<footer><div class="footer-top"><div><div class="footer-brand">Minteli<span>a</span></div><p class="footer-tagline">Premium furniture and bespoke interior solutions crafted for the way you live.</p></div><div><div class="footer-col-title">Collections</div><ul class="footer-links"><li><a href="mintelia-collections.html">All Collections</a></li><li><a href="../products/collection-sofas.html">Sofas</a></li><li><a href="../products/collection-bedroom.html">Bedroom</a></li><li><a href="../products/collection-dining.html">Dining</a></li></ul></div><div><div class="footer-col-title">Services</div><ul class="footer-links"><li><a href="mintelia-services.html">Interior Fit-Out</a></li><li><a href="mintelia-services.html">3D Design</a></li><li><a href="mintelia-services.html">Bespoke Manufacturing</a></li></ul></div><div><div class="footer-col-title">Company</div><ul class="footer-links"><li><a href="mintelia-about.html">About Us</a></li><li><a href="mintelia-portfolio.html">Portfolio</a></li><li><a href="mintelia-contact.html">Contact</a></li></ul></div></div><div class="footer-bottom"><div class="footer-copy">© 2025 Mintelia. All rights reserved.</div><div class="footer-socials"><a href="#">Ig</a><a href="#">Fb</a><a href="#">Pt</a><a href="#">Li</a></div></div></footer>
+<a href="https://wa.me/923210000000" class="float-wa" target="_blank"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg></a>
+<script>
+function filterPort(btn,cat){
+  document.querySelectorAll('.filter-tab').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.port-item').forEach(item=>{item.style.display=(cat==='all'||item.dataset.cat===cat)?'block':'none';});
+}
+</script>
+</body>
+</html>
