@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mintelia Admin Panel</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --cream: #F5F2EC; --white: #FDFCFA; --charcoal: #1A1A17;
+  --charcoal-mid: #3A3A35; --charcoal-light: #6B6B63;
+  --mint: #7DA889; --mint-light: #A8C4AF; --mint-pale: #EBF2EC;
+  --border: rgba(26,26,23,0.12); --border-strong: rgba(26,26,23,0.22);
+  --red: #E53E3E; --red-pale: #FFF5F5;
+}
+html { scroll-behavior: smooth; }
+body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--charcoal); min-height: 100vh; }
+
+/* ── LOGIN ── */
+#login-screen {
+  min-height: 100vh; display: flex; align-items: center; justify-content: center;
+  background: var(--charcoal);
+}
+.login-box {
+  background: var(--white); padding: 56px 52px; width: 420px;
+}
+.login-logo { font-family: 'Cormorant Garamond', serif; font-size: 32px; font-weight: 400; color: var(--charcoal); margin-bottom: 8px; }
+.login-logo span { color: var(--mint); }
+.login-subtitle { font-size: 13px; color: var(--charcoal-light); margin-bottom: 40px; }
+.login-label { font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--charcoal-light); margin-bottom: 8px; display: block; }
+.login-input {
+  width: 100%; padding: 14px 16px; font-family: 'DM Sans', sans-serif;
+  font-size: 14px; background: var(--white); border: 0.5px solid var(--border-strong);
+  color: var(--charcoal); outline: none; margin-bottom: 20px; transition: border-color 0.2s;
+}
+.login-input:focus { border-color: var(--mint); }
+.login-btn {
+  width: 100%; padding: 15px; font-family: 'DM Sans', sans-serif;
+  font-size: 13px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
+  background: var(--charcoal); color: var(--white); border: none; cursor: pointer; transition: background 0.2s;
+}
+.login-btn:hover { background: var(--mint); }
+.login-error { font-size: 13px; color: var(--red); margin-top: 12px; display: none; }
+
+/* ── ADMIN SHELL ── */
+#admin-shell { display: none; min-height: 100vh; }
+
+/* ── TOP BAR ── */
+.topbar {
+  position: fixed; top: 0; left: 240px; right: 0; height: 64px; z-index: 100;
+  background: var(--white); border-bottom: 0.5px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between; padding: 0 32px;
+}
+.topbar-title { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 300; color: var(--charcoal); }
+.topbar-title span { color: var(--mint); }
+.topbar-right { display: flex; align-items: center; gap: 16px; }
+.btn-download {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--mint); color: var(--white); padding: 10px 24px;
+  font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase;
+  border: none; cursor: pointer; transition: background 0.2s;
+}
+.btn-download:hover { background: var(--mint-light); }
+.btn-download svg { width: 15px; height: 15px; stroke: white; fill: none; stroke-width: 2; }
+.btn-logout {
+  font-size: 12px; color: var(--charcoal-light); background: none; border: none;
+  cursor: pointer; letter-spacing: 0.06em; text-transform: uppercase; transition: color 0.2s;
+}
+.btn-logout:hover { color: var(--red); }
+
+/* ── SIDEBAR ── */
+.sidebar {
+  position: fixed; top: 0; left: 0; bottom: 0; width: 240px;
+  background: var(--charcoal); padding: 0; z-index: 200;
+  display: flex; flex-direction: column;
+}
+.sidebar-logo {
+  padding: 28px 28px 20px;
+  font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 400;
+  color: var(--white); border-bottom: 0.5px solid rgba(255,255,255,0.08);
+}
+.sidebar-logo span { color: var(--mint); }
+.sidebar-logo small { display: block; font-family: 'DM Sans', sans-serif; font-size: 10px; font-weight: 400; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.3); margin-top: 4px; }
+.sidebar-nav { padding: 20px 0; flex: 1; }
+.sidebar-section { font-size: 10px; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.25); padding: 12px 28px 6px; }
+.nav-item {
+  display: flex; align-items: center; gap: 12px;
+  padding: 12px 28px; cursor: pointer; transition: background 0.2s;
+  font-size: 14px; font-weight: 400; color: rgba(255,255,255,0.55);
+  border: none; background: none; width: 100%; text-align: left;
+}
+.nav-item svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 1.5; flex-shrink: 0; }
+.nav-item:hover { background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.85); }
+.nav-item.active { background: rgba(125,168,137,0.15); color: var(--mint-light); }
+.sidebar-bottom { padding: 20px 28px; border-top: 0.5px solid rgba(255,255,255,0.08); }
+.sidebar-stats { font-size: 12px; color: rgba(255,255,255,0.3); line-height: 1.8; }
+.sidebar-stats strong { color: var(--mint-light); }
+
+/* ── MAIN CONTENT ── */
+.main-content { margin-left: 240px; padding-top: 64px; min-height: 100vh; }
+.page { display: none; padding: 40px 36px; }
+.page.active { display: block; }
+
+/* ── DASHBOARD ── */
+.stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 36px; }
+.stat-card { background: var(--white); padding: 28px 24px; border: 0.5px solid var(--border); }
+.stat-card-label { font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--charcoal-light); margin-bottom: 10px; }
+.stat-card-num { font-family: 'Cormorant Garamond', serif; font-size: 42px; font-weight: 300; color: var(--charcoal); line-height: 1; }
+.stat-card-num span { font-family: 'DM Sans', sans-serif; font-size: 13px; color: var(--mint); margin-left: 6px; }
+.recent-section { background: var(--white); border: 0.5px solid var(--border); }
+.recent-header { padding: 20px 24px; border-bottom: 0.5px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
+.recent-header h3 { font-size: 15px; font-weight: 500; color: var(--charcoal); }
+.recent-table { width: 100%; border-collapse: collapse; }
+.recent-table th { font-size: 10px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--charcoal-light); padding: 12px 24px; text-align: left; border-bottom: 0.5px solid var(--border); background: var(--cream); }
+.recent-table td { padding: 14px 24px; font-size: 13px; color: var(--charcoal-mid); border-bottom: 0.5px solid var(--border); }
+.recent-table tr:last-child td { border-bottom: none; }
+.recent-table tr:hover td { background: var(--cream); }
+.cat-badge { font-size: 10px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; padding: 3px 10px; background: var(--mint-pale); color: var(--mint); display: inline-block; }
+
+/* ── PAGE HEADER ── */
+.page-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 32px; }
+.page-header h2 { font-family: 'Cormorant Garamond', serif; font-size: 32px; font-weight: 300; color: var(--charcoal); }
+.page-header h2 em { font-style: italic; color: var(--mint); }
+.btn-add {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--charcoal); color: var(--white); padding: 12px 24px;
+  font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase;
+  border: none; cursor: pointer; transition: background 0.2s;
+}
+.btn-add:hover { background: var(--mint); }
+.btn-add svg { width: 14px; height: 14px; stroke: white; fill: none; stroke-width: 2.5; }
+
+/* ── PRODUCT LIST ── */
+.products-list { display: flex; flex-direction: column; gap: 0; border: 0.5px solid var(--border); background: var(--white); }
+.product-row {
+  display: grid; grid-template-columns: 64px 1fr 160px 140px 120px;
+  align-items: center; gap: 20px; padding: 16px 24px;
+  border-bottom: 0.5px solid var(--border); transition: background 0.2s;
+}
+.product-row:last-child { border-bottom: none; }
+.product-row:hover { background: var(--cream); }
+.product-row-img { width: 56px; height: 56px; object-fit: cover; display: block; background: var(--cream); }
+.product-row-name { font-size: 14px; font-weight: 500; color: var(--charcoal); margin-bottom: 3px; }
+.product-row-id { font-size: 11px; color: var(--charcoal-light); font-family: monospace; }
+.product-row-cat .cat-badge { }
+.product-row-price { font-size: 13px; color: var(--charcoal-mid); }
+.product-row-actions { display: flex; gap: 8px; justify-content: flex-end; }
+.btn-edit {
+  padding: 7px 16px; font-size: 11px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase;
+  background: transparent; border: 0.5px solid var(--border-strong); color: var(--charcoal-mid); cursor: pointer; transition: all 0.2s;
+}
+.btn-edit:hover { border-color: var(--mint); color: var(--mint); background: var(--mint-pale); }
+.btn-delete {
+  padding: 7px 14px; font-size: 11px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase;
+  background: transparent; border: 0.5px solid var(--border-strong); color: var(--charcoal-light); cursor: pointer; transition: all 0.2s;
+}
+.btn-delete:hover { border-color: var(--red); color: var(--red); background: var(--red-pale); }
+.products-empty { padding: 80px; text-align: center; color: var(--charcoal-light); font-size: 14px; }
+
+/* ── MODAL ── */
+.modal-backdrop {
+  position: fixed; inset: 0; background: rgba(26,26,23,0.6); z-index: 999;
+  display: none; align-items: flex-start; justify-content: center;
+  padding: 40px 20px; overflow-y: auto;
+}
+.modal-backdrop.open { display: flex; }
+.modal {
+  background: var(--white); width: 100%; max-width: 720px;
+  padding: 0; margin: auto;
+}
+.modal-header {
+  padding: 28px 36px; border-bottom: 0.5px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.modal-header h3 { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 300; color: var(--charcoal); }
+.modal-close { font-size: 22px; color: var(--charcoal-light); background: none; border: none; cursor: pointer; transition: color 0.2s; }
+.modal-close:hover { color: var(--charcoal); }
+.modal-body { padding: 32px 36px; }
+.modal-footer { padding: 20px 36px; border-top: 0.5px solid var(--border); display: flex; gap: 12px; justify-content: flex-end; }
+
+/* ── FORM ── */
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.form-group { margin-bottom: 0; }
+.form-group.full { grid-column: 1 / -1; }
+.form-label { font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--charcoal-light); margin-bottom: 8px; display: block; }
+.form-label span { color: var(--red); }
+.form-input, .form-select, .form-textarea {
+  width: 100%; padding: 12px 14px; font-family: 'DM Sans', sans-serif;
+  font-size: 13px; font-weight: 300; background: var(--white);
+  border: 0.5px solid var(--border-strong); color: var(--charcoal);
+  outline: none; transition: border-color 0.2s; appearance: none; resize: vertical;
+}
+.form-input:focus, .form-select:focus, .form-textarea:focus { border-color: var(--mint); }
+.form-hint { font-size: 11px; color: var(--charcoal-light); margin-top: 5px; }
+
+/* Images input */
+.images-list { display: flex; flex-direction: column; gap: 8px; margin-top: 8px; }
+.image-input-row { display: flex; gap: 8px; align-items: center; }
+.image-input-row input { flex: 1; padding: 10px 12px; font-family: 'DM Sans', sans-serif; font-size: 13px; background: var(--white); border: 0.5px solid var(--border-strong); color: var(--charcoal); outline: none; transition: border-color 0.2s; }
+.image-input-row input:focus { border-color: var(--mint); }
+.btn-remove-img { width: 32px; height: 32px; background: none; border: 0.5px solid var(--border-strong); color: var(--charcoal-light); cursor: pointer; font-size: 16px; display: flex; align-items: center; justify-content: center; transition: all 0.2s; flex-shrink: 0; }
+.btn-remove-img:hover { border-color: var(--red); color: var(--red); }
+.btn-add-img { font-size: 12px; font-weight: 400; color: var(--mint); background: none; border: 0.5px solid var(--mint); padding: 7px 16px; cursor: pointer; margin-top: 4px; transition: background 0.2s; }
+.btn-add-img:hover { background: var(--mint-pale); }
+
+/* Details fields */
+.details-list { display: flex; flex-direction: column; gap: 8px; margin-top: 8px; }
+.detail-row { display: grid; grid-template-columns: 1fr 1fr 32px; gap: 8px; align-items: center; }
+.detail-row input { padding: 10px 12px; font-family: 'DM Sans', sans-serif; font-size: 13px; background: var(--white); border: 0.5px solid var(--border-strong); color: var(--charcoal); outline: none; transition: border-color 0.2s; width: 100%; }
+.detail-row input:focus { border-color: var(--mint); }
+
+/* Buttons */
+.btn-save {
+  padding: 13px 32px; font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  background: var(--charcoal); color: var(--white); border: none; cursor: pointer; transition: background 0.2s;
+}
+.btn-save:hover { background: var(--mint); }
+.btn-cancel {
+  padding: 13px 24px; font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 400;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  background: transparent; color: var(--charcoal-light); border: 0.5px solid var(--border-strong); cursor: pointer; transition: all 0.2s;
+}
+.btn-cancel:hover { border-color: var(--charcoal); color: var(--charcoal); }
+
+/* ── TOAST ── */
+.toast {
+  position: fixed; bottom: 32px; right: 32px; z-index: 9999;
+  background: var(--charcoal); color: white; padding: 14px 24px;
+  font-size: 13px; font-weight: 400; display: none; align-items: center; gap: 10px;
+  animation: slideUp 0.3s ease;
+}
+.toast.show { display: flex; }
+.toast.success { background: var(--mint); }
+.toast.error { background: var(--red); }
+@keyframes slideUp { from{transform:translateY(20px);opacity:0} to{transform:translateY(0);opacity:1} }
+
+/* ── CONFIRM DIALOG ── */
+.confirm-backdrop {
+  position: fixed; inset: 0; background: rgba(26,26,23,0.6); z-index: 1000;
+  display: none; align-items: center; justify-content: center;
+}
+.confirm-backdrop.open { display: flex; }
+.confirm-box { background: var(--white); padding: 40px; width: 400px; text-align: center; }
+.confirm-box h4 { font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 300; margin-bottom: 12px; }
+.confirm-box p { font-size: 14px; color: var(--charcoal-light); margin-bottom: 28px; line-height: 1.7; }
+.confirm-actions { display: flex; gap: 12px; justify-content: center; }
+.btn-confirm-delete { padding: 12px 28px; background: var(--red); color: white; border: none; cursor: pointer; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; transition: opacity 0.2s; }
+.btn-confirm-delete:hover { opacity: 0.85; }
+
+/* ── JSON PREVIEW ── */
+.json-preview { background: var(--charcoal); color: var(--mint-light); padding: 24px; font-family: monospace; font-size: 12px; line-height: 1.7; overflow-x: auto; max-height: 400px; overflow-y: auto; white-space: pre; border-radius: 0; }
+</style>
+</head>
+<body>
+
+<!-- ── LOGIN ── -->
+<div id="login-screen">
+  <div class="login-box">
+    <div class="login-logo">Minteli<span>a</span></div>
+    <div class="login-subtitle">Admin Panel — sign in to continue</div>
+    <label class="login-label">Password</label>
+    <input type="password" class="login-input" id="loginPassword" placeholder="Enter password" onkeydown="if(event.key==='Enter')doLogin()"/>
+    <button class="login-btn" onclick="doLogin()">Sign In</button>
+    <div class="login-error" id="loginError">Incorrect password. Try again.</div>
+  </div>
+</div>
+
+<!-- ── ADMIN SHELL ── -->
+<div id="admin-shell">
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <div class="sidebar-logo">Minteli<span>a</span><small>Admin Panel</small></div>
+    <nav class="sidebar-nav">
+      <div class="sidebar-section">Main</div>
+      <button class="nav-item active" onclick="showPage('dashboard', this)">
+        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+        Dashboard
+      </button>
+      <button class="nav-item" onclick="showPage('products', this)">
+        <svg viewBox="0 0 24 24"><path d="M20 7H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+        Products
+      </button>
+      <div class="sidebar-section">Export</div>
+      <button class="nav-item" onclick="showPage('export', this)">
+        <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Export JSON
+      </button>
+    </nav>
+    <div class="sidebar-bottom">
+      <div class="sidebar-stats" id="sidebarStats">Loading...</div>
+    </div>
+  </div>
+
+  <!-- TOPBAR -->
+  <div class="topbar">
+    <div class="topbar-title">Minteli<span>a</span> Admin</div>
+    <div class="topbar-right">
+      <button class="btn-download" onclick="downloadJSON()">
+        <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Download products.json
+      </button>
+      <button class="btn-logout" onclick="doLogout()">Sign Out</button>
+    </div>
+  </div>
+
+  <!-- MAIN -->
+  <div class="main-content">
+
+    <!-- DASHBOARD -->
+    <div class="page active" id="page-dashboard">
+      <div class="page-header">
+        <h2>Good to see you, <em>Mintelia</em></h2>
+      </div>
+      <div class="stats-row">
+        <div class="stat-card"><div class="stat-card-label">Total Products</div><div class="stat-card-num" id="statTotal">0</div></div>
+        <div class="stat-card"><div class="stat-card-label">Categories</div><div class="stat-card-num" id="statCats">0</div></div>
+        <div class="stat-card"><div class="stat-card-label">Total Images</div><div class="stat-card-num" id="statImgs">0</div></div>
+        <div class="stat-card"><div class="stat-card-label">Last Updated</div><div class="stat-card-num" style="font-size:18px;" id="statDate">—</div></div>
+      </div>
+      <div class="recent-section">
+        <div class="recent-header"><h3>All Products</h3></div>
+        <table class="recent-table">
+          <thead><tr><th>Product</th><th>Category</th><th>Price</th><th>Images</th></tr></thead>
+          <tbody id="dashboardTable"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- PRODUCTS -->
+    <div class="page" id="page-products">
+      <div class="page-header">
+        <h2>Manage <em>Products</em></h2>
+        <button class="btn-add" onclick="openModal()">
+          <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Add Product
+        </button>
+      </div>
+      <div class="products-list" id="productsList"></div>
+    </div>
+
+    <!-- EXPORT -->
+    <div class="page" id="page-export">
+      <div class="page-header">
+        <h2>Export <em>products.json</em></h2>
+      </div>
+      <div style="background:var(--white);border:0.5px solid var(--border);padding:36px;margin-bottom:24px;">
+        <p style="font-size:15px;font-weight:300;color:var(--charcoal-light);line-height:1.9;margin-bottom:24px;">
+          Download the updated <code style="background:var(--cream);padding:2px 8px;font-size:13px;">products.json</code> file and replace the one in your GitHub repository. Vercel will auto-deploy the changes within seconds.
+        </p>
+        <div style="display:flex;gap:12px;align-items:center;margin-bottom:32px;">
+          <button class="btn-download" onclick="downloadJSON()" style="padding:14px 32px;font-size:13px;">
+            <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download products.json
+          </button>
+          <span style="font-size:13px;color:var(--charcoal-light);">Then push to GitHub → Vercel auto-deploys ✓</span>
+        </div>
+        <div style="font-size:11px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--charcoal-light);margin-bottom:12px;">Preview</div>
+        <div class="json-preview" id="jsonPreview"></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ── PRODUCT MODAL ── -->
+<div class="modal-backdrop" id="productModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 id="modalTitle">Add Product</h3>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-grid">
+        <div class="form-group">
+          <label class="form-label">Product ID <span>*</span></label>
+          <input type="text" class="form-input" id="fId" placeholder="oslo-sofa"/>
+          <div class="form-hint">Lowercase, hyphens only. e.g. oslo-sofa</div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Product Name <span>*</span></label>
+          <input type="text" class="form-input" id="fName" placeholder="Oslo 3-Seater Sofa"/>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Category <span>*</span></label>
+          <select class="form-select" id="fCategory">
+            <option value="">Select category...</option>
+            <option value="Sofas & Seating">Sofas & Seating</option>
+            <option value="Bedroom">Bedroom</option>
+            <option value="Dining">Dining</option>
+            <option value="Office">Office</option>
+            <option value="Storage & Shelving">Storage & Shelving</option>
+            <option value="Outdoor">Outdoor</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Collection Page <span>*</span></label>
+          <select class="form-select" id="fCollectionPage">
+            <option value="">Select...</option>
+            <option value="collection-sofas.html">collection-sofas.html</option>
+            <option value="collection-bedroom.html">collection-bedroom.html</option>
+            <option value="collection-dining.html">collection-dining.html</option>
+            <option value="collection-office.html">collection-office.html</option>
+            <option value="collection-storage.html">collection-storage.html</option>
+            <option value="collection-outdoor.html">collection-outdoor.html</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Price <span>*</span></label>
+          <input type="text" class="form-input" id="fPrice" placeholder="From PKR 185,000"/>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Lead Time</label>
+          <input type="text" class="form-input" id="fLeadTime" placeholder="6–8 Weeks"/>
+        </div>
+        <div class="form-group full">
+          <label class="form-label">Price Note</label>
+          <input type="text" class="form-input" id="fPriceNote" placeholder="Price varies by fabric & size."/>
+        </div>
+        <div class="form-group full">
+          <label class="form-label">Description <span>*</span></label>
+          <textarea class="form-textarea" id="fDescription" rows="4" placeholder="Write a detailed product description..."></textarea>
+        </div>
+        <div class="form-group full">
+          <label class="form-label">Images (Cloudinary URLs) <span>*</span></label>
+          <div class="form-hint" style="margin-bottom:8px;">Paste Cloudinary URLs — one per line. First image is the main photo.</div>
+          <div class="images-list" id="imagesList"></div>
+          <button class="btn-add-img" onclick="addImageField()">+ Add Image URL</button>
+        </div>
+        <div class="form-group full">
+          <label class="form-label">Specifications</label>
+          <div class="form-hint" style="margin-bottom:8px;">Key → Value pairs. e.g. Material → Solid Oak</div>
+          <div class="details-list" id="detailsList"></div>
+          <button class="btn-add-img" onclick="addDetailField()">+ Add Specification</button>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-cancel" onclick="closeModal()">Cancel</button>
+      <button class="btn-save" onclick="saveProduct()">Save Product</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── CONFIRM DELETE ── -->
+<div class="confirm-backdrop" id="confirmBackdrop">
+  <div class="confirm-box">
+    <h4>Delete Product?</h4>
+    <p>This will permanently remove the product from your data. This cannot be undone.</p>
+    <div class="confirm-actions">
+      <button class="btn-cancel" onclick="closeConfirm()">Cancel</button>
+      <button class="btn-confirm-delete" onclick="confirmDelete()">Yes, Delete</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── TOAST ── -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ── CONFIG ──
+const ADMIN_PASSWORD = 'mintelia2025'; // Change this to your password
+
+// ── STATE ──
+let products = {};
+let editingId = null;
+let deleteTargetId = null;
+
+// ── LOGIN ──
+function doLogin() {
+  const pw = document.getElementById('loginPassword').value;
+  if (pw === ADMIN_PASSWORD) {
+    document.getElementById('login-screen').style.display = 'none';
+    document.getElementById('admin-shell').style.display = 'block';
+    loadProducts();
+  } else {
+    document.getElementById('loginError').style.display = 'block';
+  }
+}
+function doLogout() {
+  document.getElementById('login-screen').style.display = 'flex';
+  document.getElementById('admin-shell').style.display = 'none';
+  document.getElementById('loginPassword').value = '';
+}
+
+// ── LOAD PRODUCTS ──
+function loadProducts() {
+  const saved = localStorage.getItem('mintelia_products');
+  if (saved) {
+    products = JSON.parse(saved);
+  } else {
+    // Default starter products
+    products = {
+      "oslo-sofa": {
+        name: "Oslo 3-Seater Sofa",
+        category: "Sofas & Seating",
+        collection_page: "collection-sofas.html",
+        price: "From PKR 185,000",
+        price_note: "Price varies by fabric & size.",
+        description: "The Oslo Sofa is a masterclass in modern minimalism. Clean straight lines paired with deep plush cushions.",
+        lead_time: "6–8 Weeks",
+        images: ["https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=900&q=85"],
+        details: { Frame: "Kiln-dried solid hardwood", Filling: "High-density foam", Warranty: "1 Year" }
+      }
+    };
+    saveProducts();
+  }
+  renderAll();
+}
+
+function saveProducts() {
+  localStorage.setItem('mintelia_products', JSON.stringify(products));
+  localStorage.setItem('mintelia_last_updated', new Date().toLocaleDateString());
+}
+
+// ── RENDER ALL ──
+function renderAll() {
+  renderDashboard();
+  renderProductsList();
+  renderExport();
+  renderSidebarStats();
+}
+
+function renderDashboard() {
+  const keys = Object.keys(products);
+  const cats = [...new Set(keys.map(k => products[k].category))];
+  const imgs = keys.reduce((acc, k) => acc + (products[k].images || []).length, 0);
+  document.getElementById('statTotal').textContent = keys.length;
+  document.getElementById('statCats').textContent = cats.length;
+  document.getElementById('statImgs').textContent = imgs;
+  document.getElementById('statDate').textContent = localStorage.getItem('mintelia_last_updated') || '—';
+
+  const tbody = document.getElementById('dashboardTable');
+  tbody.innerHTML = '';
+  keys.forEach(id => {
+    const p = products[id];
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td><strong style="font-size:13px;">${p.name}</strong><br><span style="font-size:11px;color:var(--charcoal-light);font-family:monospace;">${id}</span></td>
+      <td><span class="cat-badge">${p.category}</span></td>
+      <td>${p.price}</td>
+      <td>${(p.images||[]).length} photo${(p.images||[]).length !== 1 ? 's' : ''}</td>`;
+    tbody.appendChild(tr);
+  });
+  if (keys.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="4" style="text-align:center;padding:40px;color:var(--charcoal-light);">No products yet. Go to Products to add your first one.</td></tr>';
+  }
+}
+
+function renderProductsList() {
+  const list = document.getElementById('productsList');
+  const keys = Object.keys(products);
+  if (keys.length === 0) {
+    list.innerHTML = '<div class="products-empty">No products yet. Click "Add Product" to get started.</div>';
+    return;
+  }
+  list.innerHTML = '';
+  keys.forEach(id => {
+    const p = products[id];
+    const imgSrc = (p.images && p.images[0]) ? p.images[0].replace('w=900','w=150') : '';
+    const row = document.createElement('div');
+    row.className = 'product-row';
+    row.innerHTML = `
+      <img class="product-row-img" src="${imgSrc}" alt="${p.name}" onerror="this.style.background='var(--cream)'"/>
+      <div><div class="product-row-name">${p.name}</div><div class="product-row-id">${id}</div></div>
+      <div class="product-row-cat"><span class="cat-badge">${p.category}</span></div>
+      <div class="product-row-price">${p.price}</div>
+      <div class="product-row-actions">
+        <button class="btn-edit" onclick="openModal('${id}')">Edit</button>
+        <button class="btn-delete" onclick="openConfirm('${id}')">Delete</button>
+      </div>`;
+    list.appendChild(row);
+  });
+}
+
+function renderExport() {
+  document.getElementById('jsonPreview').textContent = JSON.stringify(products, null, 2);
+}
+
+function renderSidebarStats() {
+  const keys = Object.keys(products);
+  document.getElementById('sidebarStats').innerHTML = `
+    <strong>${keys.length}</strong> products<br>
+    <strong>${[...new Set(keys.map(k=>products[k].category))].length}</strong> categories`;
+}
+
+// ── NAVIGATION ──
+function showPage(page, btn) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.getElementById('page-' + page).classList.add('active');
+  btn.classList.add('active');
+  if (page === 'export') renderExport();
+}
+
+// ── MODAL ──
+function openModal(id = null) {
+  editingId = id;
+  document.getElementById('modalTitle').textContent = id ? 'Edit Product' : 'Add Product';
+  document.getElementById('fId').disabled = !!id;
+
+  // Reset
+  ['fId','fName','fPrice','fPriceNote','fLeadTime','fDescription'].forEach(f => document.getElementById(f).value = '');
+  document.getElementById('fCategory').value = '';
+  document.getElementById('fCollectionPage').value = '';
+  document.getElementById('imagesList').innerHTML = '';
+  document.getElementById('detailsList').innerHTML = '';
+
+  if (id && products[id]) {
+    const p = products[id];
+    document.getElementById('fId').value = id;
+    document.getElementById('fName').value = p.name || '';
+    document.getElementById('fCategory').value = p.category || '';
+    document.getElementById('fCollectionPage').value = p.collection_page || '';
+    document.getElementById('fPrice').value = p.price || '';
+    document.getElementById('fPriceNote').value = p.price_note || '';
+    document.getElementById('fLeadTime').value = p.lead_time || '';
+    document.getElementById('fDescription').value = p.description || '';
+    (p.images || []).forEach(url => addImageField(url));
+    Object.entries(p.details || {}).forEach(([k, v]) => addDetailField(k, v));
+  } else {
+    addImageField();
+    addDetailField();
+  }
+
+  document.getElementById('productModal').classList.add('open');
+}
+
+function closeModal() {
+  document.getElementById('productModal').classList.remove('open');
+  editingId = null;
+}
+
+function addImageField(value = '') {
+  const row = document.createElement('div');
+  row.className = 'image-input-row';
+  row.innerHTML = `
+    <input type="text" placeholder="https://res.cloudinary.com/dplxa9j3r/image/upload/..." value="${value}"/>
+    <button class="btn-remove-img" onclick="this.parentElement.remove()">×</button>`;
+  document.getElementById('imagesList').appendChild(row);
+}
+
+function addDetailField(key = '', value = '') {
+  const row = document.createElement('div');
+  row.className = 'detail-row';
+  row.innerHTML = `
+    <input type="text" placeholder="e.g. Material" value="${key}"/>
+    <input type="text" placeholder="e.g. Solid Oak" value="${value}"/>
+    <button class="btn-remove-img" onclick="this.parentElement.remove()">×</button>`;
+  document.getElementById('detailsList').appendChild(row);
+}
+
+function saveProduct() {
+  const id = document.getElementById('fId').value.trim().toLowerCase().replace(/\s+/g, '-');
+  const name = document.getElementById('fName').value.trim();
+  const category = document.getElementById('fCategory').value;
+  const price = document.getElementById('fPrice').value.trim();
+  const description = document.getElementById('fDescription').value.trim();
+
+  if (!id || !name || !category || !price || !description) {
+    showToast('Please fill in all required fields.', 'error');
+    return;
+  }
+
+  const images = Array.from(document.querySelectorAll('#imagesList input'))
+    .map(i => i.value.trim()).filter(v => v);
+  const details = {};
+  document.querySelectorAll('#detailsList .detail-row').forEach(row => {
+    const inputs = row.querySelectorAll('input');
+    const k = inputs[0].value.trim();
+    const v = inputs[1].value.trim();
+    if (k && v) details[k] = v;
+  });
+
+  products[id] = {
+    name,
+    category,
+    collection_page: document.getElementById('fCollectionPage').value,
+    price,
+    price_note: document.getElementById('fPriceNote').value.trim(),
+    description,
+    lead_time: document.getElementById('fLeadTime').value.trim(),
+    images,
+    details,
+    tags: [category.toLowerCase().replace(/[^a-z]/g, '-')]
+  };
+
+  saveProducts();
+  renderAll();
+  closeModal();
+  showToast(editingId ? 'Product updated!' : 'Product added!', 'success');
+}
+
+// ── DELETE ──
+function openConfirm(id) {
+  deleteTargetId = id;
+  document.getElementById('confirmBackdrop').classList.add('open');
+}
+function closeConfirm() {
+  document.getElementById('confirmBackdrop').classList.remove('open');
+  deleteTargetId = null;
+}
+function confirmDelete() {
+  if (deleteTargetId) {
+    delete products[deleteTargetId];
+    saveProducts();
+    renderAll();
+    closeConfirm();
+    showToast('Product deleted.', 'success');
+  }
+}
+
+// ── DOWNLOAD JSON ──
+function downloadJSON() {
+  const json = JSON.stringify(products, null, 2);
+  const blob = new Blob([json], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'products.json';
+  a.click();
+  URL.revokeObjectURL(url);
+  showToast('products.json downloaded!', 'success');
+}
+
+// ── TOAST ──
+function showToast(msg, type = '') {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = `toast show ${type}`;
+  setTimeout(() => t.classList.remove('show'), 3000);
+}
+
+// ── CLOSE MODAL ON BACKDROP CLICK ──
+document.getElementById('productModal').addEventListener('click', function(e) {
+  if (e.target === this) closeModal();
+});
+</script>
+</body>
+</html>
