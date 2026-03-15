@@ -58,18 +58,35 @@
   </div>
   
 </section>
-<!-- Paste this once in your <head> -->
-<script src="https://media-library.cloudinary.com/global/all.js"></script>
+<!-- Gallery powered by Cloudinary -->
+<div class="gallery-grid" id="cld-gallery"></div>
 
-<!-- Paste this where your gallery should appear -->
-<div 
-  data-cloudinary-gallery
-  data-cloud-name="dplxa9j3r"
-  data-folder="mintelia/sofas"
-  data-layout="grid"
-  data-columns="3"
-></div>
-  
+<script>
+fetch('https://res.cloudinary.com/dplxa9j3r/image/list/sofas.json')
+  .then(res => res.json())
+  .then(data => {
+    const grid = document.getElementById('cld-gallery');
+    grid.innerHTML = '';
+    data.resources.forEach((img, i) => {
+      const url = `https://res.cloudinary.com/dplxa9j3r/image/upload/q_auto,f_auto/${img.public_id}`;
+      grid.innerHTML += `
+        <div class="gallery-item" data-cat="all" onclick="openLightbox(${i})">
+          <img src="${url}" alt="Sofa Design"/>
+          <div class="gallery-item-overlay">
+            <div class="overlay-tag">Sofas</div>
+            <div class="overlay-name">${img.public_id.split('/').pop()}</div>
+          </div>
+        </div>`;
+    });
+  })
+  .catch(() => {
+    document.getElementById('cld-gallery').innerHTML = 
+      '<p style="color:var(--charcoal-light);padding:40px 0;">Gallery loading...</p>';
+  });
+</script>
+
+  <!-- Gallery powered by Cloudinary ended -->
+
 <section id="other-collections">
   <div><p class="other-tag">Explore More</p><h2 class="other-title">Other <em>collections</em></h2></div>
   <div class="other-grid"><a href="collection-bedroom.html" class="other-card"><img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400&q=80" alt="Bedroom"/><div class="other-card-overlay"><div class="other-card-name">Bedroom</div><div class="other-card-num">18 designs</div></div></a><a href="collection-dining.html" class="other-card"><img src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=400&q=80" alt="Dining"/><div class="other-card-overlay"><div class="other-card-name">Dining</div><div class="other-card-num">15 designs</div></div></a><a href="collection-office.html" class="other-card"><img src="https://images.unsplash.com/photo-1593642632559-0c6d3fc62b89?w=400&q=80" alt="Office"/><div class="other-card-overlay"><div class="other-card-name">Office</div><div class="other-card-num">12 designs</div></div></a><a href="collection-storage.html" class="other-card"><img src="https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?w=400&q=80" alt="Storage"/><div class="other-card-overlay"><div class="other-card-name">Storage</div><div class="other-card-num">20 designs</div></div></a><a href="collection-outdoor.html" class="other-card"><img src="https://images.unsplash.com/photo-1600121848594-d8644e57abab?w=400&q=80" alt="Outdoor"/><div class="other-card-overlay"><div class="other-card-name">Outdoor</div><div class="other-card-num">10 designs</div></div></a></div>
