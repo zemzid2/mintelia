@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Product | Mintelia</title>
+<link rel="stylesheet" href="../styles/base.css">
+<style>
+/* ── PAGE SHELL ── */
+body { background: var(--white); }
+
+.loading-screen {
+  position: fixed; inset: 0; background: var(--white);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 999; transition: opacity 0.4s;
+}
+.loading-screen.hidden { opacity: 0; pointer-events: none; }
+.loading-dot {
+  width: 8px; height: 8px; border-radius: 50%; background: var(--mint);
+  margin: 0 4px; animation: bounce 0.9s infinite;
+}
+.loading-dot:nth-child(2) { animation-delay: 0.15s; }
+.loading-dot:nth-child(3) { animation-delay: 0.3s; }
+@keyframes bounce { 0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)} }
+
+/* ── BREADCRUMB ── */
+.breadcrumb-bar { padding: 100px 5% 0; }
+.breadcrumb {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--charcoal-light);
+}
+.breadcrumb a { color: var(--charcoal-light); text-decoration: none; transition: color 0.2s; }
+.breadcrumb a:hover { color: var(--mint); }
+.breadcrumb-sep { color: var(--border-strong); }
+.breadcrumb-current { color: var(--charcoal); }
+
+/* ── MAIN PRODUCT LAYOUT ── */
+#product-main {
+  padding: 40px 5% 100px;
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 80px; align-items: start;
+}
+
+/* ── GALLERY ── */
+.gallery-wrap { position: sticky; top: 100px; }
+.gallery-main {
+  position: relative; overflow: hidden;
+  aspect-ratio: 4/3; background: var(--cream);
+  margin-bottom: 12px; cursor: zoom-in;
+}
+.gallery-main img {
+  width: 100%; height: 100%; object-fit: cover;
+  display: block; transition: transform 0.5s;
+}
+.gallery-main:hover img { transform: scale(1.03); }
+.gallery-arrows {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  width: 100%; padding: 0 14px;
+  display: flex; justify-content: space-between;
+  pointer-events: none;
+}
+.g-arrow {
+  width: 40px; height: 40px; background: rgba(253,252,250,0.92);
+  border: none; cursor: pointer; font-size: 20px; color: var(--charcoal);
+  display: flex; align-items: center; justify-content: center;
+  pointer-events: all; transition: background 0.2s;
+}
+.g-arrow:hover { background: var(--mint); color: white; }
+.gallery-counter {
+  position: absolute; bottom: 14px; right: 14px;
+  background: rgba(26,26,23,0.6); color: white;
+  font-size: 11px; padding: 4px 12px; letter-spacing: 0.08em;
+}
+.gallery-thumbs { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; }
+.thumb {
+  aspect-ratio: 1; overflow: hidden; cursor: pointer;
+  border: 2px solid transparent; transition: border-color 0.2s; background: var(--cream);
+}
+.thumb.active { border-color: var(--mint); }
+.thumb img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s; }
+.thumb:hover img { transform: scale(1.08); }
+
+/* ── PRODUCT INFO ── */
+.product-info { padding-top: 8px; }
+.product-cat-tag {
+  font-size: 11px; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--mint); display: flex; align-items: center; gap: 10px; margin-bottom: 14px;
+}
+.product-cat-tag::before { content: ''; display: block; width: 28px; height: 1px; background: var(--mint); }
+.product-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(36px, 4vw, 54px); font-weight: 300;
+  color: var(--charcoal); line-height: 1.1; margin-bottom: 24px;
+}
+.product-price {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 34px; font-weight: 300; color: var(--charcoal); margin-bottom: 6px;
+}
+.price-note { font-size: 12px; color: var(--charcoal-light); margin-bottom: 28px; }
+.product-desc {
+  font-size: 15px; font-weight: 300; color: var(--charcoal-light);
+  line-height: 1.9; margin-bottom: 36px;
+  padding-bottom: 36px; border-bottom: 0.5px solid var(--border-strong);
+}
+
+/* ── LEAD TIME BADGE ── */
+.lead-time-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--mint-pale); padding: 10px 18px; margin-bottom: 32px;
+}
+.lead-time-badge svg { width: 16px; height: 16px; stroke: var(--mint); fill: none; stroke-width: 1.5; }
+.lead-time-badge span { font-size: 13px; font-weight: 400; color: var(--charcoal-mid); }
+.lead-time-badge strong { color: var(--mint); }
+
+/* ── SPEC TABLE ── */
+.spec-section { margin-bottom: 36px; }
+.spec-title {
+  font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--charcoal-light); margin-bottom: 16px;
+}
+.spec-table { width: 100%; border-collapse: collapse; }
+.spec-table tr { border-bottom: 0.5px solid var(--border); }
+.spec-table tr:last-child { border-bottom: none; }
+.spec-table td { padding: 10px 0; font-size: 13px; }
+.spec-table td:first-child { color: var(--charcoal-light); width: 45%; }
+.spec-table td:last-child { color: var(--charcoal); font-weight: 400; }
+
+/* ── ACTIONS ── */
+.product-actions { display: flex; gap: 12px; margin-bottom: 24px; }
+.btn-enquire {
+  flex: 1; padding: 17px;
+  font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  background: var(--charcoal); color: var(--white);
+  border: none; cursor: pointer; transition: background 0.2s;
+}
+.btn-enquire:hover { background: var(--mint); }
+.btn-wa-prod {
+  width: 56px; height: 56px; background: #25D366;
+  display: flex; align-items: center; justify-content: center;
+  border: none; cursor: pointer; transition: background 0.2s;
+  text-decoration: none; flex-shrink: 0;
+}
+.btn-wa-prod:hover { background: #1abe58; }
+.btn-wa-prod svg { width: 22px; height: 22px; fill: white; }
+
+/* ── GUARANTEES ── */
+.product-guarantee {
+  display: flex; gap: 20px; flex-wrap: wrap;
+  padding: 20px 0; border-top: 0.5px solid var(--border);
+  border-bottom: 0.5px solid var(--border); margin-bottom: 28px;
+}
+.guarantee-item { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--charcoal-light); }
+.guarantee-item svg { width: 15px; height: 15px; stroke: var(--mint); fill: none; stroke-width: 1.5; flex-shrink: 0; }
+
+/* ── RELATED ── */
+#related { padding: 100px 5%; background: var(--cream); }
+.related-header { margin-bottom: 40px; }
+.related-tag {
+  font-size: 11px; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--mint); display: flex; align-items: center; gap: 10px; margin-bottom: 12px;
+}
+.related-tag::before { content: ''; display: block; width: 28px; height: 1px; background: var(--mint); }
+.related-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(28px, 3vw, 40px); font-weight: 300; color: var(--charcoal); }
+.related-title em { font-style: italic; color: var(--mint); }
+.related-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+.related-card { cursor: pointer; text-decoration: none; display: block; }
+.related-img { aspect-ratio: 4/5; overflow: hidden; background: var(--white); margin-bottom: 16px; position: relative; }
+.related-img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.5s; }
+.related-card:hover .related-img img { transform: scale(1.05); }
+.related-overlay {
+  position: absolute; inset: 0; background: rgba(26,26,23,0.5);
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; transition: opacity 0.3s;
+}
+.related-card:hover .related-overlay { opacity: 1; }
+.related-overlay-btn {
+  font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
+  color: white; border: 1px solid rgba(255,255,255,0.7); padding: 10px 22px;
+}
+.related-cat { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--mint); margin-bottom: 5px; }
+.related-name { font-family: 'Cormorant Garamond', serif; font-size: 19px; font-weight: 400; color: var(--charcoal); margin-bottom: 4px; }
+.related-price { font-size: 13px; color: var(--charcoal-light); }
+
+/* ── NOT FOUND ── */
+#not-found {
+  display: none; min-height: 60vh;
+  align-items: center; justify-content: center;
+  flex-direction: column; text-align: center; padding: 120px 5%;
+}
+#not-found h2 { font-family: 'Cormorant Garamond', serif; font-size: 48px; font-weight: 300; color: var(--charcoal); margin-bottom: 16px; }
+#not-found p { font-size: 15px; color: var(--charcoal-light); margin-bottom: 32px; }
+
+/* ── LIGHTBOX ── */
+.lightbox { position: fixed; inset: 0; z-index: 1000; background: rgba(10,10,8,0.95); display: none; align-items: center; justify-content: center; }
+.lightbox.open { display: flex; }
+.lb-img { max-width: 88vw; max-height: 88vh; object-fit: contain; display: block; }
+.lb-close { position: absolute; top: 24px; right: 32px; font-size: 26px; color: rgba(255,255,255,0.5); cursor: pointer; background: none; border: none; transition: color 0.2s; }
+.lb-close:hover { color: white; }
+.lb-arrow { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.08); border: none; color: rgba(255,255,255,0.6); font-size: 28px; width: 56px; height: 56px; cursor: pointer; transition: background 0.2s; }
+.lb-arrow:hover { background: var(--mint); color: white; }
+.lb-arrow.prev { left: 16px; }
+.lb-arrow.next { right: 16px; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 1024px) {
+  #product-main { grid-template-columns: 1fr; gap: 48px; }
+  .gallery-wrap { position: static; }
+  .related-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 768px) {
+  .nav-links, .nav-cta { display: none; }
+  .product-actions { flex-wrap: wrap; }
+  .btn-enquire { width: 100%; }
+  .related-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  .footer-top { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- LOADING -->
+<div class="loading-screen" id="loadingScreen">
+  <div class="loading-dot"></div>
+  <div class="loading-dot"></div>
+  <div class="loading-dot"></div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a href="../structure/mintelia.html" class="nav-logo">Minteli<span>a</span></a>
+  <ul class="nav-links">
+    <li><a href="../structure/mintelia-collections.html" class="active">Collections</a></li>
+    <li><a href="../structure/mintelia-about.html">About</a></li>
+    <li><a href="../structure/mintelia-services.html">Services</a></li>
+    <li><a href="../structure/mintelia-portfolio.html">Portfolio</a></li>
+    <li><a href="../structure/mintelia-contact.html">Contact</a></li>
+  </ul>
+  <a href="../structure/mintelia-contact.html" class="nav-cta">Get a Quote</a>
+</nav>
+
+<!-- BREADCRUMB -->
+<div class="breadcrumb-bar">
+  <div class="breadcrumb">
+    <a href="../structure/mintelia.html">Home</a>
+    <span class="breadcrumb-sep">›</span>
+    <a href="../structure/mintelia-collections.html">Collections</a>
+    <span class="breadcrumb-sep">›</span>
+    <a href="#" id="bcCollection">Category</a>
+    <span class="breadcrumb-sep">›</span>
+    <span class="breadcrumb-current" id="bcProduct">Product</span>
+  </div>
+</div>
+
+<!-- PRODUCT MAIN -->
+<section id="product-main">
+
+  <!-- GALLERY -->
+  <div class="gallery-wrap">
+    <div class="gallery-main" id="galleryMain" onclick="openLightbox(currentImg)">
+      <img id="mainImg" src="" alt=""/>
+      <div class="gallery-arrows">
+        <button class="g-arrow" onclick="event.stopPropagation(); changeImg(-1)">‹</button>
+        <button class="g-arrow" onclick="event.stopPropagation(); changeImg(1)">›</button>
+      </div>
+      <div class="gallery-counter" id="imgCounter">1 / 1</div>
+    </div>
+    <div class="gallery-thumbs" id="thumbsContainer"></div>
+  </div>
+
+  <!-- INFO -->
+  <div class="product-info">
+    <div class="product-cat-tag" id="productCat"></div>
+    <h1 class="product-title" id="productName"></h1>
+    <div class="product-price" id="productPrice"></div>
+    <div class="price-note" id="priceNote"></div>
+    <p class="product-desc" id="productDesc"></p>
+
+    <div class="lead-time-badge" id="leadTimeBadge">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+      <span>Lead Time: <strong id="leadTimeVal"></strong></span>
+    </div>
+
+    <div class="product-actions">
+      <button class="btn-enquire" id="btnEnquire">Enquire / Order Now</button>
+      <a href="#" class="btn-wa-prod" id="btnWa" target="_blank">
+        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+      </a>
+    </div>
+
+    <div class="product-guarantee">
+      <div class="guarantee-item"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>1-Year Warranty</div>
+      <div class="guarantee-item"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>Free Delivery</div>
+      <div class="guarantee-item"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Handcrafted in Karachi</div>
+    </div>
+
+    <div class="spec-section">
+      <div class="spec-title">Specifications</div>
+      <table class="spec-table" id="specTable"></table>
+    </div>
+  </div>
+</section>
+
+<!-- NOT FOUND -->
+<div id="not-found">
+  <h2>Product not found</h2>
+  <p>The product you're looking for doesn't exist or may have been removed.</p>
+  <a href="../structure/mintelia-collections.html" class="btn-primary">Browse All Collections</a>
+</div>
+
+<!-- RELATED -->
+<section id="related">
+  <div class="related-header">
+    <p class="related-tag">You May Also Like</p>
+    <h2 class="related-title">More from <em id="relatedCatTitle">this collection</em></h2>
+  </div>
+  <div class="related-grid" id="relatedGrid"></div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div><div class="footer-brand">Minteli<span>a</span></div><p class="footer-tagline">Premium furniture and bespoke interior solutions crafted for the way you live.</p></div>
+    <div><div class="footer-col-title">Collections</div><ul class="footer-links">
+      <li><a href="../structure/mintelia-collections.html">All Collections</a></li>
+      <li><a href="collection-sofas.html">Sofas</a></li>
+      <li><a href="collection-bedroom.html">Bedroom</a></li>
+      <li><a href="collection-dining.html">Dining</a></li>
+    </ul></div>
+    <div><div class="footer-col-title">Services</div><ul class="footer-links">
+      <li><a href="../structure/mintelia-services.html">Interior Fit-Out</a></li>
+      <li><a href="../structure/mintelia-services.html">3D Design</a></li>
+      <li><a href="../structure/mintelia-services.html">Bespoke Manufacturing</a></li>
+    </ul></div>
+    <div><div class="footer-col-title">Company</div><ul class="footer-links">
+      <li><a href="../structure/mintelia-about.html">About Us</a></li>
+      <li><a href="../structure/mintelia-portfolio.html">Portfolio</a></li>
+      <li><a href="../structure/mintelia-contact.html">Contact</a></li>
+    </ul></div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2025 Mintelia. All rights reserved.</div>
+    <div class="footer-socials"><a href="#">Ig</a><a href="#">Fb</a><a href="#">Pt</a><a href="#">Li</a></div>
+  </div>
+</footer>
+
+<!-- FLOATING WA -->
+<a href="https://wa.me/923210000000" class="float-wa" target="_blank">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+</a>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <button class="lb-close" onclick="closeLightbox()">✕</button>
+  <button class="lb-arrow prev" onclick="changeImg(-1); document.getElementById('lbImg').src = images[currentImg]">‹</button>
+  <img class="lb-img" id="lbImg" src="" alt=""/>
+  <button class="lb-arrow next" onclick="changeImg(1); document.getElementById('lbImg').src = images[currentImg]">›</button>
+</div>
+
+<script>
+// ── Read product ID from URL ──
+const params = new URLSearchParams(window.location.search);
+const productId = params.get('id');
+let images = [];
+let currentImg = 0;
+
+// ── Load products.json and render ──
+fetch('../products.json')
+  .then(res => res.json())
+  .then(data => {
+    const product = data[productId];
+    if (!product) {
+      showNotFound();
+      return;
+    }
+    renderProduct(product, data);
+  })
+  .catch(() => showNotFound());
+
+function renderProduct(p, allProducts) {
+  // Page title
+  document.title = p.name + ' | Mintelia';
+
+  // Breadcrumb
+  document.getElementById('bcProduct').textContent = p.name;
+  const bcColl = document.getElementById('bcCollection');
+  bcColl.textContent = p.category;
+  bcColl.href = p.collection_page;
+
+  // Gallery
+  images = p.images;
+  setImage(0);
+
+  // Build thumbs
+  const thumbsEl = document.getElementById('thumbsContainer');
+  thumbsEl.innerHTML = '';
+  images.forEach((src, i) => {
+    const div = document.createElement('div');
+    div.className = 'thumb' + (i === 0 ? ' active' : '');
+    div.onclick = () => setImage(i);
+    div.innerHTML = `<img src="${src.replace('w=900','w=200')}" alt="View ${i+1}"/>`;
+    thumbsEl.appendChild(div);
+  });
+
+  // Info
+  document.getElementById('productCat').textContent = p.category;
+  document.getElementById('productName').textContent = p.name;
+  document.getElementById('productPrice').textContent = p.price;
+  document.getElementById('priceNote').textContent = p.price_note;
+  document.getElementById('productDesc').textContent = p.description;
+  document.getElementById('leadTimeVal').textContent = p.lead_time;
+
+  // Spec table
+  const table = document.getElementById('specTable');
+  table.innerHTML = '';
+  Object.entries(p.details).forEach(([key, val]) => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `<td>${key}</td><td>${val}</td>`;
+    table.appendChild(tr);
+  });
+
+  // WhatsApp button
+  const waMsg = `Hi Mintelia! I'm interested in the ${p.name}. Can you share more details?`;
+  document.getElementById('btnWa').href = `https://wa.me/923210000000?text=${encodeURIComponent(waMsg)}`;
+
+  // Enquire button
+  document.getElementById('btnEnquire').onclick = () => {
+    window.location.href = `../structure/mintelia-contact.html`;
+  };
+
+  // Related products — same category, max 4
+  const related = Object.entries(allProducts)
+    .filter(([id, prod]) => id !== productId && prod.category === p.category)
+    .slice(0, 4);
+
+  document.getElementById('relatedCatTitle').textContent = p.category;
+  const relGrid = document.getElementById('relatedGrid');
+  relGrid.innerHTML = '';
+
+  if (related.length === 0) {
+    document.getElementById('related').style.display = 'none';
+  } else {
+    related.forEach(([id, prod]) => {
+      const card = document.createElement('a');
+      card.href = `product.html?id=${id}`;
+      card.className = 'related-card';
+      card.innerHTML = `
+        <div class="related-img">
+          <img src="${prod.images[0].replace('w=900','w=400')}" alt="${prod.name}"/>
+          <div class="related-overlay"><span class="related-overlay-btn">View Product</span></div>
+        </div>
+        <div class="related-cat">${prod.category}</div>
+        <div class="related-name">${prod.name}</div>
+        <div class="related-price">${prod.price}</div>`;
+      relGrid.appendChild(card);
+    });
+  }
+
+  // Show page
+  document.getElementById('loadingScreen').classList.add('hidden');
+  document.getElementById('product-main').style.display = 'grid';
+}
+
+function showNotFound() {
+  document.getElementById('loadingScreen').classList.add('hidden');
+  document.getElementById('product-main').style.display = 'none';
+  document.getElementById('related').style.display = 'none';
+  const nf = document.getElementById('not-found');
+  nf.style.display = 'flex';
+}
+
+// ── Gallery controls ──
+function setImage(i) {
+  currentImg = i;
+  const mainImg = document.getElementById('mainImg');
+  mainImg.style.opacity = '0';
+  setTimeout(() => {
+    mainImg.src = images[i];
+    mainImg.style.opacity = '1';
+  }, 150);
+  mainImg.style.transition = 'opacity 0.2s';
+  document.getElementById('imgCounter').textContent = (i + 1) + ' / ' + images.length;
+  document.querySelectorAll('.thumb').forEach((t, idx) => t.classList.toggle('active', idx === i));
+}
+
+function changeImg(dir) {
+  setImage((currentImg + dir + images.length) % images.length);
+}
+
+// ── Lightbox ──
+function openLightbox(i) {
+  document.getElementById('lbImg').src = images[i];
+  document.getElementById('lightbox').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.getElementById('lightbox').addEventListener('click', function(e) {
+  if (e.target === this) closeLightbox();
+});
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeLightbox();
+  if (e.key === 'ArrowLeft') changeImg(-1);
+  if (e.key === 'ArrowRight') changeImg(1);
+});
+
+// Hide product main until loaded
+document.getElementById('product-main').style.display = 'none';
+</script>
+</body>
+</html>
