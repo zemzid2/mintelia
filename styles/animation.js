@@ -1,9 +1,3 @@
-/* ============================================================
-   MINTELIA — ANIMATIONS.JS
-   Add this to every page before </body>:
-   <script src="../styles/animations.js"></script>
-   ============================================================ */
-
 (function() {
 
   // ── SCROLL OBSERVER — fade up elements ──
@@ -15,6 +9,9 @@
       }
     });
   }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+  // Expose globally so Cloudinary gallery can use it after loading
+  window.minteliaObserver = observer;
 
   // Auto-observe common elements
   function observeElements() {
@@ -32,7 +29,6 @@
 
     selectors.forEach(sel => {
       document.querySelectorAll(sel).forEach(el => {
-        // Add fade-up class if not already animated
         if (!el.classList.contains('fade-up') &&
             !el.classList.contains('fade-left') &&
             !el.classList.contains('fade-right')) {
@@ -75,7 +71,6 @@
 
   // ── COUNTER ANIMATION for stats ──
   function animateCounter(el, target, duration) {
-    const start = 0;
     const step = (timestamp) => {
       if (!el._start) el._start = timestamp;
       const progress = Math.min((timestamp - el._start) / duration, 1);
@@ -131,7 +126,7 @@
     initSmoothScroll();
   });
 
-  // Fallback — show all elements if observer fails
+  // Fallback — show all elements after 1.5s if observer fails
   setTimeout(() => {
     document.querySelectorAll('.fade-up, .fade-left, .fade-right').forEach(el => {
       el.classList.add('visible');
