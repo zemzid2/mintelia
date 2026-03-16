@@ -97,7 +97,7 @@ const tagToProduct = {
   "Green sofa": "oslo-sofa"
 };
 
-fetch('https://res.cloudinary.com/dplxa9j3r/image/list/sofas.json')
+fetch('https://res.cloudinary.com/dplxa9j3r/image/list/sofas.json?_=' + Date.now())
   .then(res => res.json())
   .then(data => {
     const grid = document.getElementById('cld-gallery');
