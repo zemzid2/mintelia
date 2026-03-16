@@ -6,7 +6,9 @@
 <title>Bedroom | Mintelia</title>
 <link rel="stylesheet" href="../styles/base.css">
 <link rel="stylesheet" href="../styles/products.css">
+<link rel="stylesheet" href="../styles/animations.css">
 </head>
+
 <body>
 <nav><a href="../structure/mintelia.html" class="nav-logo">Minteli<span>a</span></a><ul class="nav-links"><li><a href="../structure/mintelia-collections.html">Collections</a></li><li><a href="../structure/mintelia-about.html">About</a></li><li><a href="../structure/mintelia-services.html">Services</a></li><li><a href="../structure/mintelia-portfolio.html">Portfolio</a></li><li><a href="../structure/mintelia-contact.html">Contact</a></li></ul><a href="../structure/mintelia-contact.html" class="nav-cta">Get a Quote</a></nav>
 <div class="page-hero">
@@ -42,7 +44,7 @@
     <div class="filter-tabs"><button class="filter-tab active" onclick="filterGallery(this,'all')">All Designs</button><button class="filter-tab" onclick="filterGallery(this,'bed')">Beds</button><button class="filter-tab" onclick="filterGallery(this,'wardrobe')">Wardrobes</button><button class="filter-tab" onclick="filterGallery(this,'set')">Full Sets</button></div>
   </div>
   <!-- added gallery here -->
-   
+
    <div class="gallery-grid" id="cld-gallery"></div>
 <script>
 fetch('https://res.cloudinary.com/dplxa9j3r/image/list/bedroom.json?_=' + Date.now())
@@ -83,5 +85,7 @@ document.getElementById('lightbox').addEventListener('click',function(e){if(e.ta
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLightbox();if(e.key==='ArrowLeft')lbNav(-1);if(e.key==='ArrowRight')lbNav(1);});
 function filterGallery(btn,cat){document.querySelectorAll('.filter-tab').forEach(b=>b.classList.remove('active'));btn.classList.add('active');gi.forEach(item=>{item.style.display=(cat==='all'||item.dataset.cat===cat)?'block':'none';});}
 </script>
+<script src="../styles/animations.js"></script>
+<!-- animations -->
 </body>
 </html>

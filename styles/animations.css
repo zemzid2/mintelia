@@ -1,0 +1,231 @@
+/* ============================================================
+   MINTELIA — ANIMATIONS.CSS
+   Add this to every page: <link rel="stylesheet" href="../styles/animations.css">
+   For structure pages: <link rel="stylesheet" href="../styles/animations.css">
+   ============================================================ */
+
+/* ── FADE UP (sections appearing on scroll) ── */
+.fade-up {
+  opacity: 0;
+  transform: translateY(36px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.fade-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── FADE LEFT ── */
+.fade-left {
+  opacity: 0;
+  transform: translateX(-36px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.fade-left.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* ── FADE RIGHT ── */
+.fade-right {
+  opacity: 0;
+  transform: translateX(36px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.fade-right.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* ── STAGGER CHILDREN (cards, grids) ── */
+.stagger > * {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.stagger.visible > *:nth-child(1) { opacity: 1; transform: translateY(0); transition-delay: 0s; }
+.stagger.visible > *:nth-child(2) { opacity: 1; transform: translateY(0); transition-delay: 0.1s; }
+.stagger.visible > *:nth-child(3) { opacity: 1; transform: translateY(0); transition-delay: 0.2s; }
+.stagger.visible > *:nth-child(4) { opacity: 1; transform: translateY(0); transition-delay: 0.3s; }
+.stagger.visible > *:nth-child(5) { opacity: 1; transform: translateY(0); transition-delay: 0.4s; }
+.stagger.visible > *:nth-child(6) { opacity: 1; transform: translateY(0); transition-delay: 0.5s; }
+
+/* ── HERO TEXT SLIDE IN ── */
+.hero-animate .hero-tag-home,
+.hero-animate .hero-tag {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: slideUp 0.7s ease 0.2s forwards;
+}
+.hero-animate .hero-title,
+.hero-animate .page-hero-title {
+  opacity: 0;
+  transform: translateY(24px);
+  animation: slideUp 0.8s ease 0.35s forwards;
+}
+.hero-animate .hero-desc,
+.hero-animate .page-hero-desc {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: slideUp 0.7s ease 0.5s forwards;
+}
+.hero-animate .hero-actions,
+.hero-animate .hero-right {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: slideUp 0.7s ease 0.65s forwards;
+}
+.hero-animate .breadcrumb {
+  opacity: 0;
+  animation: fadeIn 0.6s ease 0.1s forwards;
+}
+
+@keyframes slideUp {
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+
+/* ── NAV SHRINK ON SCROLL ── */
+nav { transition: height 0.3s ease, box-shadow 0.3s ease; }
+nav.scrolled {
+  height: 58px !important;
+  box-shadow: 0 2px 24px rgba(0,0,0,0.08);
+}
+
+/* ── CARD HOVER LIFT ── */
+.category-card,
+.service-card,
+.testimonial-card,
+.catalogue-card,
+.product-card,
+.related-card,
+.other-card,
+.val-card,
+.team-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.category-card:hover,
+.service-card:hover,
+.testimonial-card:hover,
+.catalogue-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(26,26,23,0.1);
+}
+
+/* ── BUTTON HOVER EFFECTS ── */
+.btn-primary,
+.btn-mint,
+.btn-white,
+.btn-submit,
+.nav-cta,
+.catalogue-btn {
+  transition: background 0.25s ease, transform 0.2s ease;
+}
+.btn-primary:hover,
+.btn-mint:hover,
+.btn-white:hover,
+.btn-submit:hover,
+.nav-cta:hover,
+.catalogue-btn:hover {
+  transform: translateY(-2px);
+}
+.btn-primary:active,
+.btn-mint:active,
+.btn-submit:active {
+  transform: translateY(0);
+}
+
+/* ── GALLERY IMAGE ZOOM ── */
+.gallery-item {
+  overflow: hidden;
+}
+.gallery-item img {
+  transition: transform 0.6s ease !important;
+}
+.gallery-item:hover img {
+  transform: scale(1.06) !important;
+}
+
+/* ── STATS COUNTER ANIMATION ── */
+.stat-num, .ab-stat-num {
+  transition: color 0.3s ease;
+}
+
+/* ── PAGE LOAD FADE IN ── */
+@keyframes pageFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+body {
+  animation: pageFadeIn 0.4s ease;
+}
+
+/* ── SMOOTH SCROLL INDICATOR ── */
+.scroll-indicator {
+  position: absolute;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  opacity: 0.5;
+  animation: bounce 2s infinite;
+}
+.scroll-indicator span {
+  display: block;
+  width: 1px;
+  height: 48px;
+  background: rgba(255,255,255,0.5);
+}
+@keyframes bounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(8px); }
+}
+
+/* ── FLOATING WA PULSE ── */
+.float-wa {
+  animation: waPulse 2.5s infinite;
+}
+.float-wa:hover {
+  animation: none;
+  transform: scale(1.1);
+}
+@keyframes waPulse {
+  0%, 100% { box-shadow: 0 4px 20px rgba(37,211,102,0.4); }
+  50% { box-shadow: 0 4px 32px rgba(37,211,102,0.7); }
+}
+
+/* ── LINK UNDERLINE ANIMATION ── */
+.nav-links a {
+  position: relative;
+}
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--mint);
+  transition: width 0.3s ease;
+}
+.nav-links a:hover::after,
+.nav-links a.active::after {
+  width: 100%;
+}
+
+/* ── INPUT FOCUS ANIMATION ── */
+.form-input, .form-select, .form-textarea,
+.form-group input, .form-group select, .form-group textarea,
+.login-input {
+  transition: border-color 0.25s ease, box-shadow 0.25s ease !important;
+}
+.form-input:focus, .form-select:focus, .form-textarea:focus,
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus,
+.login-input:focus {
+  box-shadow: 0 0 0 3px rgba(125,168,137,0.15) !important;
+}
