@@ -9,7 +9,7 @@
 
   // ── CONFIG ──
   const PHONE = '923148310764';
-  const DELAY = 30000; // 30 seconds
+  const DELAY = 15000; // 30 seconds time
   const MESSAGE = 'Hi Mintelia! I visited your website and I\'m interested in your furniture.';
   const STORAGE_KEY = 'mintelia_popup_shown';
 
