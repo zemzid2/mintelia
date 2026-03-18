@@ -1,9 +1,12 @@
 (function () {
-
   document.addEventListener('DOMContentLoaded', function () {
 
     const nav = document.querySelector('nav');
     if (!nav) return;
+
+    const navLinks = nav.querySelector('.nav-links');
+    const navCta = nav.querySelector('.nav-cta');
+    if (!navLinks) return;
 
     // ── Inject hamburger button ──
     const hamburger = document.createElement('button');
@@ -13,15 +16,9 @@
     nav.appendChild(hamburger);
 
     // ── Inject mobile menu ──
-    const navLinks = nav.querySelector('.nav-links');
-    const navCta = nav.querySelector('.nav-cta');
-
-    if (!navLinks) return;
-
     const mobileMenu = document.createElement('div');
     mobileMenu.className = 'nav-mobile';
 
-    // Clone links
     const ul = document.createElement('ul');
     navLinks.querySelectorAll('a').forEach(link => {
       const li = document.createElement('li');
@@ -34,7 +31,6 @@
     });
     mobileMenu.appendChild(ul);
 
-    // Clone CTA button
     if (navCta) {
       const cta = document.createElement('a');
       cta.href = navCta.href;
@@ -45,31 +41,45 @@
 
     document.body.appendChild(mobileMenu);
 
-    // ── Toggle ──
-    hamburger.addEventListener('click', function () {
-      hamburger.classList.toggle('open');
-      mobileMenu.classList.toggle('open');
-      document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+    // ── Toggle open/close ──
+    function openMenu() {
+      hamburger.classList.add('open');
+      mobileMenu.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeMenu() {
+      hamburger.classList.remove('open');
+      mobileMenu.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    hamburger.addEventListener('click', function (e) {
+      e.stopPropagation();
+      mobileMenu.classList.contains('open') ? closeMenu() : openMenu();
     });
 
     // ── Close on link click ──
     mobileMenu.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => {
-        hamburger.classList.remove('open');
-        mobileMenu.classList.remove('open');
-        document.body.style.overflow = '';
-      });
+      link.addEventListener('click', closeMenu);
     });
 
     // ── Close on outside click ──
     document.addEventListener('click', function (e) {
       if (!nav.contains(e.target) && !mobileMenu.contains(e.target)) {
-        hamburger.classList.remove('open');
-        mobileMenu.classList.remove('open');
-        document.body.style.overflow = '';
+        closeMenu();
       }
     });
 
-  });
+    // ── Close on resize back to desktop ──
+    window.addEventListener('resize', function () {
+      if (window.innerWidth > 900) closeMenu();
+    });
 
+    // ── Nav shrink on scroll ──
+    window.addEventListener('scroll', function () {
+      nav.classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive: true });
+
+  });
 })();
