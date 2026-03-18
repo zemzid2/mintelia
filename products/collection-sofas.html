@@ -108,15 +108,18 @@ fetch('https://res.cloudinary.com/dplxa9j3r/image/list/sofas.json?_=' + Date.now
       const filename = img.public_id.split('/').pop();
       const productId = tagToProduct[filename] || null;
       const clickAction = productId ? `onclick="window.location='product.html?id=${productId}'"` : `onclick="openLightbox(${i})"`;
-      grid.innerHTML += `
-        <div class="gallery-item" data-cat="all" ${clickAction} style="cursor:pointer;">
-          <img src="${url}" alt="Sofa Design"/>
-          <div class="gallery-item-overlay">
-            <div class="overlay-tag">Sofas & Seating</div>
-    
-            <div class="overlay-finish">${productId ? 'Click to view details' : 'Click to enlarge'}</div>
-          </div>
-        </div>`;
+      const waMsg = `Hi Mintelia! I'm interested in the ${filename.replace(/-/g,' ')}. Can you send me a quote?`;
+grid.innerHTML += `
+  <div class="gallery-item" data-cat="all" style="cursor:pointer;">
+    <img src="${url}" alt="Sofa Design"/>
+    <div class="gallery-item-overlay">
+      <div class="overlay-tag">Sofas & Seating</div>
+      <div class="overlay-actions">
+        <a href="product.html?id=${filename}" class="overlay-btn-view">View Details</a>
+        <a href="https://wa.me/923148310764?text=${encodeURIComponent(waMsg)}" class="overlay-btn-wa" target="_blank">Request Quote</a>
+      </div>
+    </div>
+  </div>`;
     });
   })
   .catch(() => {

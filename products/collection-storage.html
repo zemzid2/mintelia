@@ -53,7 +53,18 @@ fetch('https://res.cloudinary.com/dplxa9j3r/image/list/storage.json?_=' + Date.n
     data.resources.forEach((img) => {
       const url = `https://res.cloudinary.com/dplxa9j3r/image/upload/q_auto,f_auto/${img.public_id}`;
       const filename = img.public_id.split('/').pop();
-      grid.innerHTML += `<div class="gallery-item" data-cat="all" onclick="window.location='product.html?id=${filename}'" style="cursor:pointer;"><img src="${url}" alt="Storage Design"/><div class="gallery-item-overlay"><div class="overlay-tag">Storage</div><div class="overlay-finish">Click to view details</div></div></div>`;
+      const waMsg = `Hi Mintelia! I'm interested in the ${filename.replace(/-/g,' ')}. Can you send me a quote?`;
+grid.innerHTML += `
+  <div class="gallery-item" data-cat="all" style="cursor:pointer;">
+    <img src="${url}" alt="Storage Design"/>
+    <div class="gallery-item-overlay">
+      <div class="overlay-tag">Storage & Shelving</div>
+      <div class="overlay-actions">
+        <a href="product.html?id=${filename}" class="overlay-btn-view">View Details</a>
+        <a href="https://wa.me/923148310764?text=${encodeURIComponent(waMsg)}" class="overlay-btn-wa" target="_blank">Request Quote</a>
+      </div>
+    </div>
+  </div>`;
     });
   }).catch(() => { document.getElementById('cld-gallery').innerHTML = '<p style="color:var(--charcoal-light);padding:40px 0;">Gallery loading...</p>'; });
 </script>
