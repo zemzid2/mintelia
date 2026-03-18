@@ -169,21 +169,20 @@ nav {
 
 @media (min-width: 901px) {
   .nav-links {
-    transition: opacity 0.4s ease, transform 0.4s ease;
+    transition: opacity 0.8s ease, transform 0.8s ease;
     opacity: 1;
     transform: translateX(0);
   }
   .nav-cta {
-    transition: opacity 0.4s ease, transform 0.4s ease;
+    transition: background 0.2s, opacity 0.8s ease, transform 0.8s ease;
     opacity: 1;
     transform: translateX(0);
   }
   .nav-hamburger {
     display: none;
     opacity: 0;
+    transition: opacity 0.8s ease;
   }
-
-  
 }
 /* -------------------------------------------- */
 
