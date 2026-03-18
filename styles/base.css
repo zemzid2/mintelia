@@ -76,6 +76,8 @@ nav.scrolled { height: 58px; box-shadow: 0 2px 24px rgba(0,0,0,0.08); }
   z-index: 200;
   opacity: 0;
   transition: opacity 1.2s ease;
+  will-change: transform;       
+  transform: translateZ(0);     
 }
 .nav-hamburger span {
   display: block;
