@@ -99,5 +99,9 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLightbox();if(e
 function filterGallery(btn,cat){document.querySelectorAll('.filter-tab').forEach(b=>b.classList.remove('active'));btn.classList.add('active');gi.forEach(item=>{item.style.display=(cat==='all'||item.dataset.cat===cat)?'block':'none';});}
 </script>
 <script src="../styles/animations.js"></script>
+
+<!-- animations -->
+<script src="../styles/animations.js"></script>
+
 </body>
 </html>
