@@ -154,5 +154,11 @@
       nav.classList.toggle('scrolled', window.scrollY > 40);
     }, { passive: true });
 
+    window.addEventListener('scroll', function () {
+    const scrolled = window.scrollY > 40;
+    nav.classList.toggle('scrolled', scrolled);
+    mobileMenu.style.top = scrolled ? '58px' : '72px';
+    }, { passive: true });
+
   });
 })();
