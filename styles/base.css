@@ -145,10 +145,47 @@ nav {
 
 /* ── RESPONSIVE ── */
 @media (max-width: 900px) {
-  .nav-links { opacity: 0; transform: translateX(16px); pointer-events: none; position: absolute; visibility: hidden; }
-  .nav-cta { opacity: 0; transform: translateX(16px); pointer-events: none; position: absolute; visibility: hidden; }
-  .nav-hamburger { display: flex; opacity: 1; }
+  .nav-links {
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    opacity: 0;
+    transform: translateX(20px);
+    pointer-events: none;
+    position: absolute;
+    visibility: hidden;
+  }
+  .nav-cta {
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    opacity: 0;
+    transform: translateX(20px);
+    pointer-events: none;
+    position: absolute;
+    visibility: hidden;
+  }
+  .nav-hamburger {
+    display: flex;
+    opacity: 1;
+  }
 }
+
+@media (min-width: 901px) {
+  .nav-links {
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    opacity: 1;
+    transform: translateX(0);
+  }
+  .nav-cta {
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    opacity: 1;
+    transform: translateX(0);
+  }
+  .nav-hamburger {
+    display: none;
+    opacity: 0;
+  }
+
+  
+}
+/* -------------------------------------------- */
 
 /* ── BREADCRUMB ── */
 .breadcrumb {
@@ -460,6 +497,44 @@ footer { background: var(--charcoal); padding: 80px 5% 40px; }
 
 /* ── RESPONSIVE NAV ── */
 @media (max-width: 900px) {
+  .nav-links {
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    opacity: 0;
+    transform: translateX(20px);
+    pointer-events: none;
+    position: absolute;
+    visibility: hidden;
+  }
+  .nav-cta {
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    opacity: 0;
+    transform: translateX(20px);
+    pointer-events: none;
+    position: absolute;
+    visibility: hidden;
+  }
+  .nav-hamburger {
+    display: flex;
+    opacity: 1;
+  }
+}
+
+@media (min-width: 901px) {
+  .nav-links {
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    opacity: 1;
+    transform: translateX(0);
+  }
+  .nav-cta {
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    opacity: 1;
+    transform: translateX(0);
+  }
+  .nav-hamburger {
+    display: none;
+    opacity: 0;
+  }
+} {
   .nav-links, .nav-cta { display: none; }
   .nav-hamburger { display: flex; }
 }
