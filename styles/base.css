@@ -146,7 +146,7 @@ nav {
 /* ── RESPONSIVE ── */
 @media (max-width: 900px) {
   .nav-links {
-    transition: opacity 0.4s ease, transform 0.4s ease;
+    transition: opacity 3s ease, transform 3s ease, visibility 0s linear 3s;
     opacity: 0;
     transform: translateX(20px);
     pointer-events: none;
@@ -154,7 +154,7 @@ nav {
     visibility: hidden;
   }
   .nav-cta {
-    transition: opacity 0.4s ease, transform 0.4s ease;
+    transition: opacity 3s ease, transform 3s ease, visibility 0s linear 3s;
     opacity: 0;
     transform: translateX(20px);
     pointer-events: none;
@@ -164,24 +164,27 @@ nav {
   .nav-hamburger {
     display: flex;
     opacity: 1;
+    transition: opacity 3s ease;
   }
 }
 
 @media (min-width: 901px) {
   .nav-links {
-    transition: opacity 0.8s ease, transform 0.8s ease;
+    transition: opacity 3s ease, transform 3s ease, visibility 0s linear 0s;
     opacity: 1;
     transform: translateX(0);
+    visibility: visible;
   }
   .nav-cta {
-    transition: background 0.2s, opacity 0.8s ease, transform 0.8s ease;
+    transition: background 0.2s, opacity 3s ease, transform 3s ease, visibility 0s linear 0s;
     opacity: 1;
     transform: translateX(0);
+    visibility: visible;
   }
   .nav-hamburger {
     display: none;
     opacity: 0;
-    transition: opacity 0.8s ease;
+    transition: opacity 3s ease;
   }
 }
 /* -------------------------------------------- */

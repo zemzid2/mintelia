@@ -41,6 +41,86 @@
 
     document.body.appendChild(mobileMenu);
 
+    // ── Handle resize with smooth animation ──
+    let isMobile = window.innerWidth <= 900;
+
+    function setMobileState(mobile) {
+      if (mobile === isMobile) return;
+      isMobile = mobile;
+
+      if (mobile) {
+        // Widening → Narrowing: slide links out to the right, fade in hamburger
+        navLinks.style.transition = 'opacity 1.2s ease, transform 1.2s ease';
+        navCta.style.transition = 'opacity 1.2s ease, transform 1.2s ease';
+        hamburger.style.transition = 'opacity 1.2s ease';
+
+        navLinks.style.opacity = '0';
+        navLinks.style.transform = 'translateX(20px)';
+        navCta.style.opacity = '0';
+        navCta.style.transform = 'translateX(20px)';
+        hamburger.style.display = 'flex';
+        hamburger.style.opacity = '0';
+
+        setTimeout(() => {
+          navLinks.style.pointerEvents = 'none';
+          navLinks.style.position = 'absolute';
+          navLinks.style.visibility = 'hidden';
+          navCta.style.pointerEvents = 'none';
+          navCta.style.position = 'absolute';
+          navCta.style.visibility = 'hidden';
+          hamburger.style.opacity = '1';
+        }, 100);
+
+      } else {
+        // Narrowing → Widening: slide links back in, fade out hamburger
+        navLinks.style.visibility = 'visible';
+        navLinks.style.position = 'relative';
+        navLinks.style.pointerEvents = 'all';
+        navCta.style.visibility = 'visible';
+        navCta.style.position = 'relative';
+        navCta.style.pointerEvents = 'all';
+
+        navLinks.style.transition = 'opacity 1.2s ease, transform 1.2s ease';
+        navCta.style.transition = 'opacity 1.2s ease, transform 1.2s ease';
+        hamburger.style.transition = 'opacity 1.2s ease';
+
+        setTimeout(() => {
+          navLinks.style.opacity = '1';
+          navLinks.style.transform = 'translateX(0)';
+          navCta.style.opacity = '1';
+          navCta.style.transform = 'translateX(0)';
+          hamburger.style.opacity = '0';
+        }, 50);
+
+        setTimeout(() => {
+          hamburger.style.display = 'none';
+          closeMenu();
+        }, 1250);
+      }
+    }
+
+    // Set initial state without animation
+    if (isMobile) {
+      navLinks.style.opacity = '0';
+      navLinks.style.transform = 'translateX(20px)';
+      navLinks.style.pointerEvents = 'none';
+      navLinks.style.position = 'absolute';
+      navLinks.style.visibility = 'hidden';
+      navCta.style.opacity = '0';
+      navCta.style.transform = 'translateX(20px)';
+      navCta.style.pointerEvents = 'none';
+      navCta.style.position = 'absolute';
+      navCta.style.visibility = 'hidden';
+      hamburger.style.display = 'flex';
+      hamburger.style.opacity = '1';
+    } else {
+      hamburger.style.display = 'none';
+    }
+
+    window.addEventListener('resize', function () {
+      setMobileState(window.innerWidth <= 900);
+    });
+
     // ── Toggle open/close ──
     function openMenu() {
       hamburger.classList.add('open');
@@ -59,21 +139,14 @@
       mobileMenu.classList.contains('open') ? closeMenu() : openMenu();
     });
 
-    // ── Close on link click ──
     mobileMenu.querySelectorAll('a').forEach(link => {
       link.addEventListener('click', closeMenu);
     });
 
-    // ── Close on outside click ──
     document.addEventListener('click', function (e) {
       if (!nav.contains(e.target) && !mobileMenu.contains(e.target)) {
         closeMenu();
       }
-    });
-
-    // ── Close on resize back to desktop ──
-    window.addEventListener('resize', function () {
-      if (window.innerWidth > 900) closeMenu();
     });
 
     // ── Nav shrink on scroll ──
