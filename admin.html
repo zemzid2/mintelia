@@ -401,7 +401,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--charco
 const ADMIN_PASSWORD = 'mintelia2025';
 const CLD_CLOUD = 'dplxa9j3r';
 const CLD_PRESET = 'allimages';
-const GH_TOKEN = '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';
+const GH_TOKEN = localStorage.getItem('mintelia_gh_token') || '';
 const GH_REPO = 'zemzid2/mintelia';
 const GH_FILE = 'products.json';
 
@@ -415,6 +415,13 @@ let currentLibFolder = 'sofas';
 // ── LOGIN ──
 function doLogin() {
   if (document.getElementById('loginPw').value === ADMIN_PASSWORD) {
+    // Check if token is already saved
+    let token = localStorage.getItem('mintelia_gh_token');
+    if (!token) {
+      token = prompt('Enter your GitHub Personal Access Token:\n(This is stored only in your browser — never in your code)');
+      if (!token) { alert('GitHub token is required to use the admin panel.'); return; }
+      localStorage.setItem('mintelia_gh_token', token);
+    }
     document.getElementById('login-screen').style.display = 'none';
     document.getElementById('admin-shell').style.display = 'block';
     loadProducts();
