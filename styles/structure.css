@@ -251,9 +251,6 @@
 
 /* ── RESPONSIVE ── */
 @media (max-width: 1024px) {
-  #hero { grid-template-columns: 1fr; min-height: auto; }
-  .hero-left { padding: 80px 5%; }
-  .hero-right { height: 500px; }
   #about { grid-template-columns: 1fr; gap: 60px; }
   .about-images { height: 420px; }
   #contact { grid-template-columns: 1fr; gap: 60px; }
